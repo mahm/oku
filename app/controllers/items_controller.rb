@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   respond_to :html
 
   def index
-    @items = Item.all
+    @items = current_user.items
     respond_with(@items)
   end
 
@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = Item.new
+    @item = current_user.items.build
     respond_with(@item)
   end
 
@@ -22,6 +22,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+    @item.user_id = current_user.id
     @item.save
     respond_with(@item)
   end
@@ -38,10 +39,10 @@ class ItemsController < ApplicationController
 
   private
     def set_item
-      @item = Item.find(params[:id])
+      @item = current_user.items.find(params[:id])
     end
 
     def item_params
-      params.require(:item).permit(:user_id, :category_id, :name, :explanation)
+      params.require(:item).permit(:category_id, :name, :explanation)
     end
 end
