@@ -17,6 +17,7 @@ gem 'haml-rails'
 gem 'kaminari'
 gem 'simple_form'
 gem 'squeel'
+gem 'devise'
 
 group :development do
   gem 'better_errors'
