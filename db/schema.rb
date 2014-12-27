@@ -14,13 +14,13 @@
 ActiveRecord::Schema.define(version: 20141227064440) do
 
   create_table "auctions", force: true do |t|
-    t.integer  "item_id"
-    t.integer  "user_id"
-    t.datetime "open_at"
-    t.datetime "close_at"
-    t.integer  "first_price"
-    t.integer  "highest_price"
-    t.boolean  "closed"
+    t.integer  "item_id",                       null: false
+    t.integer  "user_id",                       null: false
+    t.datetime "open_at",                       null: false
+    t.datetime "close_at",                      null: false
+    t.integer  "first_price",   default: 0,     null: false
+    t.integer  "highest_price", default: 0,     null: false
+    t.boolean  "closed",        default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
