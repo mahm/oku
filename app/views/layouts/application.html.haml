@@ -5,14 +5,23 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+
   %body
 
-    - if notice
-      %p.alert.alert-success
-        = notice
+    %header.navbar.navbar-default
+      .container-fluid
+        .navbar-header
+          = link_to 'オク ！', root_path, class: 'navbar-brand'
+        .navbar-right
+          %ul.nav.navbar-nav
+            - if user_signed_in?
+              %li
+                = link_to current_user.email, '#', class: 'user-id'
+              %li
+                = link_to 'サインアウト', destroy_user_session_path, class: 'btn'
+            - else
+              %li
+                = link_to 'サインイン', new_user_session_path, class: 'btn'
 
-    - if alert
-      %p.alert.alert-danger
-        = alert
-
-    = yield
+    .container
+      = yield
