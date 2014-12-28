@@ -1,12 +1,11 @@
 FactoryGirl.define do
   factory :auction do
-    item nil
-user nil
-open_at "2014-12-27 15:44:40"
-close_at "2014-12-27 15:44:40"
-first_price 1
-highest_price 1
-closed false
+    association :item
+    association :user
+    open_at Time.now + 1.hour
+    close_at Time.now + 1.day
+    first_price 0
+    highest_price 0
+    closed false
   end
-
 end
