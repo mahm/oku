@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141228065348) do
+ActiveRecord::Schema.define(version: 20141229031335) do
 
   create_table "auctions", force: true do |t|
     t.integer  "item_id",                       null: false
@@ -43,7 +43,10 @@ ActiveRecord::Schema.define(version: 20141228065348) do
     t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "code"
   end
+
+  add_index "categories", ["code"], name: "index_categories_on_code", unique: true
 
   create_table "items", force: true do |t|
     t.integer  "user_id",     null: false
