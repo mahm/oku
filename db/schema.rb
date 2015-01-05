@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141229031335) do
+ActiveRecord::Schema.define(version: 20150105233203) do
 
   create_table "auctions", force: true do |t|
     t.integer  "item_id",                       null: false
@@ -47,6 +47,18 @@ ActiveRecord::Schema.define(version: 20141229031335) do
   end
 
   add_index "categories", ["code"], name: "index_categories_on_code", unique: true
+
+  create_table "evaluations", force: true do |t|
+    t.integer  "evaluater_id"
+    t.integer  "evaluatee_id"
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "evaluations", ["evaluatee_id"], name: "index_evaluations_on_evaluatee_id"
+  add_index "evaluations", ["evaluater_id", "evaluatee_id"], name: "index_evaluations_on_evaluater_id_and_evaluatee_id", unique: true
+  add_index "evaluations", ["evaluater_id"], name: "index_evaluations_on_evaluater_id"
 
   create_table "items", force: true do |t|
     t.integer  "user_id",     null: false

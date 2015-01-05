@@ -7,5 +7,9 @@ class CreateEvaluations < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :evaluations, :evaluater_id
+    add_index :evaluations, :evaluatee_id
+    add_index :evaluations, [:evaluater_id, :evaluatee_id], unique: true
   end
 end
