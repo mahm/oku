@@ -28,4 +28,24 @@ RSpec.describe User, :type => :model do
     user.valid?
     expect(user.errors[:password]).to include("is too short (minimum is 8 characters)")
   end
+
+  describe 'Evaluate other user' do
+    let(:evaluater) { create(:user) }
+    let(:evaluatee) { create(:user) }
+    let(:comment) {
+      %Q{それは黄金の昼下がり
+気ままにただようぼくら
+オールは二本ともあぶなげに
+小さな腕で漕がれ
+小さな手がぼくらのただよいを導こうと
+かっこうだけ申し訳につけて
+ああ残酷な三人！こんな時間に}
+    }
+
+    it 'should be success when a user is not evaluate other user yet' do
+      evaluater.evaluate!(evaluatee, comment)
+      expect(Evaluation.last.evaluater_id).to eq(evaluater.id)
+      expect(Evaluation.last.evaluatee_id).to eq(evaluatee.id)
+    end
+  end
 end
