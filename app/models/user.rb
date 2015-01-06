@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_many :bids
   has_many :evaluations, foreign_key: 'evaluater_id', dependent: :destroy
   has_many :evaluatees, through: :evaluations
+  has_many :reverse_evaluations, foreign_key: 'evaluatee_id', class_name: 'Evaluation', dependent: :destroy
+  has_many :evaluaters, through: :reverse_evaluations
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

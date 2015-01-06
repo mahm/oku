@@ -44,8 +44,9 @@ RSpec.describe User, :type => :model do
 
     it 'should be success when a user is not evaluate other user yet' do
       evaluater.evaluate!(evaluatee, comment)
-      expect(Evaluation.last.evaluater_id).to eq(evaluater.id)
-      expect(Evaluation.last.evaluatee_id).to eq(evaluatee.id)
+      expect(evaluater).to be_evaluate(evaluatee)
+      expect(evaluater.evaluatees).to include(evaluatee)
+      expect(evaluatee.evaluaters).to include(evaluater)
     end
   end
 end
