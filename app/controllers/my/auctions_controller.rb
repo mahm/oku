@@ -1,4 +1,4 @@
-class My::AuctionsController < ApplicationController
+class My::AuctionsController < My::ApplicationController
   def index
   end
 
