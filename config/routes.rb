@@ -4,4 +4,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :auctions, only: [:index]
+
+  namespace :my do
+    resources :auctions, only: [:index, :show, :create, :edit, :update, :destroy]
+  end
 end
