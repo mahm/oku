@@ -3,6 +3,5 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  # get 'auctions', to: 'auctions#index'
   resources :auctions, only: [:index]
 end
