@@ -1,2 +1,13 @@
-%h1 My::Auctions#index
-%p Find me in app/views/my/auctions/index.html.haml
+%h1 オークション一覧
+
+%hr
+
+%h2 あなたが開催しているオークション一覧
+
+- if current_user.auctions.blank?
+  %p あなたが開催しているオークションはありません。
+
+%h2 入札中のオークション一覧
+
+- if current_user.bids.blank?
+  %p 入札中のオークションはありません。
