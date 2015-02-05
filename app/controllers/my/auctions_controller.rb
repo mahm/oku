@@ -5,6 +5,9 @@ class My::AuctionsController < My::ApplicationController
   def show
   end
 
+  def new
+  end
+
   def create
   end
 
