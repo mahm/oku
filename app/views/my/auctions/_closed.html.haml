@@ -11,7 +11,6 @@
       %th 開始日時
       %th 終了日時
       %th 落札価格
-    -# TODO: 落札者を表示
     %tbody
       - closed_auctions.each do |auction|
         %tr
@@ -20,4 +19,5 @@
           %td= auction.open_at
           %td= auction.close_at
           %td= auction.highest_price
-            -# TODO: 落札者を表示
+
+          -# TODO: 落札者を一覧表に表示
