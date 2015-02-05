@@ -1,6 +1,7 @@
 class Auction < ActiveRecord::Base
   belongs_to :item
   belongs_to :user
+  belongs_to :category
   has_many :bids
 
   validates :item_id, presence: true
@@ -10,6 +11,7 @@ class Auction < ActiveRecord::Base
   validates :title, presence: true
   validates :item_name, presence: true
   validates :amount, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :category_id, presence: true
   validates :first_price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :highest_price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
