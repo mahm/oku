@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   resources :auctions, only: [:index]
 
   namespace :my do
-    resources :auctions, only: [:index, :show, :create, :edit, :update, :destroy]
+    resources :auctions
   end
 end
