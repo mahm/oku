@@ -1,13 +1,102 @@
-%h1 オークション一覧
+%h1 マイ オークション
 
 %hr
 
-%h2 あなたが開催しているオークション一覧
+-# TODO: タブによる切り替え
 
-- if current_user.auctions.blank?
-  %p あなたが開催しているオークションはありません。
+%h2 出品予定のオークション一覧
+- unopened_auctions = current_user.auctions.unopened
+- if unopened_auctions.blank?
+  %p 出品予定のオークションはありません。
+- else
+  %table.table.table-striped
+    %thead
+      %th カテゴリ
+      %th タイトル
+      %th 商品名
+      %th 開始（予定）日時
+      %th 終了予定日時
+      %th
+    %tbody
+      - unopened_auctions.each do |auction|
+        %tr
+          %td= auction.category.name
+          %td= auction.title
+          %td= auction.item_name
+          %td= auction.open_at
+          %td= auction.close_at
+          %td
+            %ul.list-inline
+              %li
+                = link_to my_auction_path(auction) do
+                  %span.glyphicon.glyphicon-eye-open
+              %li
+                = link_to edit_my_auction_path(auction) do
+                  %span.glyphicon.glyphicon-pencil
+              %li
+                = link_to edit_my_auction_path(auction) do
+                  %span.glyphicon.glyphicon-remove
 
-= link_to 'オークションの新規作成', new_my_auction_path, class: 'btn btn-primary'
+%h2 出品中のオークション一覧
+
+- opened_auctions = current_user.auctions.opened
+- if opened_auctions.blank?
+  %p 出品中のオークションはありません。
+- else
+  %table.table.table-striped
+    %thead
+      %th カテゴリ
+      %th タイトル
+      %th 商品名
+      %th 開始（予定）日時
+      %th 終了予定日時
+      %th
+    %tbody
+      - opened_auctions.each do |auction|
+        %tr
+          %td= auction.category.name
+          %td= auction.title
+          %td= auction.item_name
+          %td= auction.open_at
+          %td= auction.close_at
+          %td
+            %ul.list-inline
+              %li
+                = link_to my_auction_path(auction) do
+                  %span.glyphicon.glyphicon-eye-open
+              %li
+                = link_to edit_my_auction_path(auction) do
+                  %span.glyphicon.glyphicon-pencil
+              %li
+                = link_to edit_my_auction_path(auction) do
+                  %span.glyphicon.glyphicon-remove
+
+%h2 終了したオークション一覧
+
+- closed_auctions = current_user.auctions.closed
+- if closed_auctions.blank?
+  %p 終了したオークションはありません。
+- else
+  %table.table.table-striped
+    %thead
+      %th タイトル
+      %th 商品名
+      %th 開始日時
+      %th 終了日時
+      %th 落札価格
+    -# TODO: 落札者を表示
+    %tbody
+      - closed_auctions.each do |auction|
+        %tr
+          %td= auction.title
+          %td= auction.item_name
+          %td= auction.open_at
+          %td= auction.close_at
+          %td= auction.highest_price
+        -# TODO: 落札者を表示
+
+        .buttons
+  = link_to 'オークションの新規作成', new_my_auction_path, class: 'btn btn-primary'
 
 %h2 入札中のオークション一覧
 

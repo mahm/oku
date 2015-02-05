@@ -8,10 +8,10 @@ class Auction < ActiveRecord::Base
   validates :close_at, presence: true
   validates :title, presence: true
   validates :item_name, presence: true
-  validates :amount, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :amount, presence: true, numericality: {only_integer: true, greater_than: 0}
   validates :category_id, presence: true
-  validates :first_price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validates :highest_price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :first_price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  validates :highest_price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
 
   validate :close_time_cannot_be_in_past_of_open_time
   validate :term_cannot_be_in_past
@@ -30,4 +30,17 @@ class Auction < ActiveRecord::Base
       errors.add(:close_at, "close time can't be in the past") if Time.now >= close_at
     end
   end
+
+  scope :unopened, -> {
+    order(:open_at)
+    where { (open_at.gt Time.now) }
+  }
+  scope :opened, -> {
+    order(:close_at)
+    where { (closed.eq false) & (open_at.lteq Time.now) }
+  }
+  scope :closed, -> {
+    order('close_at DESC')
+    where { (closed.eq true) }
+  }
 end
