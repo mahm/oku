@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205031430) do
+ActiveRecord::Schema.define(version: 20150205032218) do
 
   create_table "auctions", force: true do |t|
     t.integer  "user_id",                       null: false
@@ -62,18 +62,6 @@ ActiveRecord::Schema.define(version: 20150205031430) do
   add_index "evaluations", ["evaluatee_id"], name: "index_evaluations_on_evaluatee_id"
   add_index "evaluations", ["evaluater_id", "evaluatee_id"], name: "index_evaluations_on_evaluater_id_and_evaluatee_id", unique: true
   add_index "evaluations", ["evaluater_id"], name: "index_evaluations_on_evaluater_id"
-
-  create_table "items", force: true do |t|
-    t.integer  "user_id",     null: false
-    t.integer  "category_id", null: false
-    t.string   "name",        null: false
-    t.text     "explanation"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "items", ["category_id"], name: "index_items_on_category_id"
-  add_index "items", ["user_id"], name: "index_items_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
