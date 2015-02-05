@@ -7,6 +7,8 @@
 - if current_user.auctions.blank?
   %p あなたが開催しているオークションはありません。
 
+= link_to 'オークションの新規作成', new_my_auction_path, class: 'btn btn-primary'
+
 %h2 入札中のオークション一覧
 
 - if current_user.bids.blank?
