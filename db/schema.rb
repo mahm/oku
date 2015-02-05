@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150105233203) do
+ActiveRecord::Schema.define(version: 20150205020117) do
 
   create_table "auctions", force: true do |t|
     t.integer  "item_id",                       null: false
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20150105233203) do
     t.boolean  "closed",        default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
   end
 
   add_index "auctions", ["item_id"], name: "index_auctions_on_item_id"

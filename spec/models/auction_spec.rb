@@ -29,6 +29,11 @@ RSpec.describe Auction, :type => :model do
     expect(auction.errors[:first_price]).to include("can't be blank")
   end
 
+  it 'is invalid without a first_price' do
+    auction = build(:auction, title: nil)
+    auction.valid?
+    expect(auction.errors[:title]).to include("can't be blank")
+  end
   it 'is invalid when close time is past of open itme' do
     auction = build(:auction, close_at: Time.now - 1.day, open_at: Time.now)
     auction.valid?
