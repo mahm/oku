@@ -1,0 +1,8 @@
+%h1 オークションの新規登録
+
+%hr
+
+= simple_form_for(current_user.auctions.build) do |f|
+  = f.error_notification
+  .form-controls
+    = f.input :first_price
