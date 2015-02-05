@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :auction do
-    association :item
     association :user
     category_id 1
     title 'This is auction title'

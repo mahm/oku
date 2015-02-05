@@ -1,10 +1,8 @@
 class Auction < ActiveRecord::Base
-  belongs_to :item
   belongs_to :user
   belongs_to :category
   has_many :bids
 
-  validates :item_id, presence: true
   validates :user_id, presence: true
   validates :open_at, presence: true
   validates :close_at, presence: true

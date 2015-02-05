@@ -5,12 +5,6 @@ RSpec.describe Auction, :type => :model do
     expect(build(:auction)).to be_valid
   end
 
-  it 'is invalid without a item_id' do
-    auction = build(:auction, item_id: nil)
-    auction.valid?
-    expect(auction.errors[:item_id]).to include("can't be blank")
-  end
-
   it 'is invalid without a open_at' do
     auction = build(:auction, open_at: nil)
     auction.valid?

@@ -11,10 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205023657) do
+ActiveRecord::Schema.define(version: 20150205031430) do
 
   create_table "auctions", force: true do |t|
-    t.integer  "item_id",                       null: false
     t.integer  "user_id",                       null: false
     t.datetime "open_at",                       null: false
     t.datetime "close_at",                      null: false
@@ -30,7 +29,6 @@ ActiveRecord::Schema.define(version: 20150205023657) do
   end
 
   add_index "auctions", ["category_id"], name: "index_auctions_on_category_id"
-  add_index "auctions", ["item_id"], name: "index_auctions_on_item_id"
   add_index "auctions", ["user_id"], name: "index_auctions_on_user_id"
 
   create_table "bids", force: true do |t|
