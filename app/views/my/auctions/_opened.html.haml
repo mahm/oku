@@ -1,0 +1,21 @@
+- opened_auctions = current_user.auctions.opened
+
+- if opened_auctions.blank?
+  %p.text-muted
+    出品中のオークションはありません。
+- else
+  %table.table.table-striped
+    %thead
+      %th カテゴリ
+      %th タイトル
+      %th 商品名
+      %th 開始（予定）日時
+      %th 終了予定日時
+    %tbody
+      - opened_auctions.each do |auction|
+        %tr
+          %td= auction.category.name
+          %td= auction.title
+          %td= auction.item_name
+          %td= auction.open_at
+          %td= auction.close_at

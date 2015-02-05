@@ -1,0 +1,23 @@
+- closed_auctions = current_user.auctions.closed
+
+- if closed_auctions.blank?
+  %p.text-muted
+    終了したオークションはありません。
+- else
+  %table.table.table-striped
+    %thead
+      %th タイトル
+      %th 商品名
+      %th 開始日時
+      %th 終了日時
+      %th 落札価格
+    -# TODO: 落札者を表示
+    %tbody
+      - closed_auctions.each do |auction|
+        %tr
+          %td= auction.title
+          %td= auction.item_name
+          %td= auction.open_at
+          %td= auction.close_at
+          %td= auction.highest_price
+            -# TODO: 落札者を表示

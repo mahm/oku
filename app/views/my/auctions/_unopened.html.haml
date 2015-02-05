@@ -1,0 +1,30 @@
+- unopened_auctions = current_user.auctions.unopened
+
+- if unopened_auctions.blank?
+  %p.text-muted 出品予定のオークションはありません。
+- else
+  %table.table.table-striped
+    %thead
+      %th タイトル
+      %th 商品名
+      %th 開始（予定）日時
+      %th 終了予定日時
+      %th
+    %tbody
+      - unopened_auctions.each do |auction|
+        %tr
+          %td= auction.title
+          %td= auction.item_name
+          %td= auction.open_at
+          %td= auction.close_at
+          %td
+            %ul.list-inline
+              %li
+                = link_to my_auction_path(auction) do
+                  %span.glyphicon.glyphicon-eye-open
+              %li
+                = link_to edit_my_auction_path(auction) do
+                  %span.glyphicon.glyphicon-pencil
+              %li
+                = link_to edit_my_auction_path(auction) do
+                  %span.glyphicon.glyphicon-remove

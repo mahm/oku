@@ -2,103 +2,32 @@
 
 %hr
 
--# TODO: タブによる切り替え
+%div{:role => 'tabpanel'}
+  %ul#foo.nav.nav-tabs{:role => 'tablist'}
+    %li.active{:role => 'presentation'}
+      %a{'aria-controls' => 'unopened', 'data-toggle' => 'tab', href: '#unopened', role: 'tab'} 出品予定
+    %li{:role => 'presentation'}
+      %a{'aria-controls' => 'opened', 'data-toggle' => 'tab', href: '#opened', role: 'tab'} 出品中
+    %li{:role => 'presentation'}
+      %a{'aria-controls' => 'closed', 'data-toggle' => 'tab', href: '#closed', role: 'tab'} 完了
+    %li{:role => 'presentation'}
+      %a{'aria-controls' => 'bidding', 'data-toggle' => 'tab', href: '#bidding', role: 'tab'} 入札中
+    %li{:role => 'presentation'}
+      %a{'aria-controls' => 'accepted', 'data-toggle' => 'tab', href: '#accepted', role: 'tab'} 落札
+  .tab-content
+    -# TODO: 以下のパーシャルを DRY に書けないだろうか ?
+    #unopened.tab-pane.active{role: 'tabpanel'}
+      = render 'unopened'
+    #opened.tab-pane{role: 'tabpanel'}
+      = render 'opened'
+    #closed.tab-pane{role: 'tabpanel'}
+      = render 'closed'
+    #bidding.tab-pane{role: 'tabpanel'}
+      = render 'bidding'
+    #accepted.tab-pane{role: 'tabpanel'}
+      = render 'accepted'
 
-%h2 出品予定のオークション一覧
-- unopened_auctions = current_user.auctions.unopened
-- if unopened_auctions.blank?
-  %p 出品予定のオークションはありません。
-- else
-  %table.table.table-striped
-    %thead
-      %th カテゴリ
-      %th タイトル
-      %th 商品名
-      %th 開始（予定）日時
-      %th 終了予定日時
-      %th
-    %tbody
-      - unopened_auctions.each do |auction|
-        %tr
-          %td= auction.category.name
-          %td= auction.title
-          %td= auction.item_name
-          %td= auction.open_at
-          %td= auction.close_at
-          %td
-            %ul.list-inline
-              %li
-                = link_to my_auction_path(auction) do
-                  %span.glyphicon.glyphicon-eye-open
-              %li
-                = link_to edit_my_auction_path(auction) do
-                  %span.glyphicon.glyphicon-pencil
-              %li
-                = link_to edit_my_auction_path(auction) do
-                  %span.glyphicon.glyphicon-remove
+%hr
 
-%h2 出品中のオークション一覧
-
-- opened_auctions = current_user.auctions.opened
-- if opened_auctions.blank?
-  %p 出品中のオークションはありません。
-- else
-  %table.table.table-striped
-    %thead
-      %th カテゴリ
-      %th タイトル
-      %th 商品名
-      %th 開始（予定）日時
-      %th 終了予定日時
-      %th
-    %tbody
-      - opened_auctions.each do |auction|
-        %tr
-          %td= auction.category.name
-          %td= auction.title
-          %td= auction.item_name
-          %td= auction.open_at
-          %td= auction.close_at
-          %td
-            %ul.list-inline
-              %li
-                = link_to my_auction_path(auction) do
-                  %span.glyphicon.glyphicon-eye-open
-              %li
-                = link_to edit_my_auction_path(auction) do
-                  %span.glyphicon.glyphicon-pencil
-              %li
-                = link_to edit_my_auction_path(auction) do
-                  %span.glyphicon.glyphicon-remove
-
-%h2 終了したオークション一覧
-
-- closed_auctions = current_user.auctions.closed
-- if closed_auctions.blank?
-  %p 終了したオークションはありません。
-- else
-  %table.table.table-striped
-    %thead
-      %th タイトル
-      %th 商品名
-      %th 開始日時
-      %th 終了日時
-      %th 落札価格
-    -# TODO: 落札者を表示
-    %tbody
-      - closed_auctions.each do |auction|
-        %tr
-          %td= auction.title
-          %td= auction.item_name
-          %td= auction.open_at
-          %td= auction.close_at
-          %td= auction.highest_price
-        -# TODO: 落札者を表示
-
-        .buttons
+.buttons
   = link_to 'オークションの新規作成', new_my_auction_path, class: 'btn btn-primary'
-
-%h2 入札中のオークション一覧
-
-- if current_user.bids.blank?
-  %p 入札中のオークションはありません。
