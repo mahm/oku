@@ -1,5 +1,9 @@
 class HomeController < ApplicationController
   def index
-    redirect_to auctions_path
+    if user_signed_in?
+      redirect_to my_auctions_path
+    else
+      redirect_to auctions_path
+    end
   end
 end
