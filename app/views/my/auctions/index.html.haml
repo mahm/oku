@@ -2,9 +2,9 @@
 
 %hr
 
-%div{:role => 'tabpanel'}
-  %ul#foo.nav.nav-tabs{:role => 'tablist'}
-    %li.active{:role => 'presentation'}
+%div{role: 'tabpanel'}
+  %ul.nav.nav-tabs{role: 'tablist'}
+    %li.active{role: 'presentation'}
       %a{'aria-controls' => 'unopened', 'data-toggle' => 'tab', href: '#unopened', role: 'tab'} 出品予定
     %li{:role => 'presentation'}
       %a{'aria-controls' => 'opened', 'data-toggle' => 'tab', href: '#opened', role: 'tab'} 出品中
