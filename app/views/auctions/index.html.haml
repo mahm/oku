@@ -4,3 +4,24 @@
 
 - if @auctions.blank?
   %p 現在開催されているオークションは存在しません。
+- else
+  %table.table
+    %thead
+      %tr
+        %th タイトル
+        %th 商品名
+        %th 終了日時
+        %th 現在の最高入札金額
+        %th
+    %tbody
+      - @auctions.each do |auction|
+        %tr
+          %td= auction.title
+          %td= auction.item_name
+          %td= auction.close_at
+          %td
+          %td
+            %ul.list-inline
+              %li
+                = link_to my_auction_path(auction) do
+                  %span.glyphicon.glyphicon-eye-open
