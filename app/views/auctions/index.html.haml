@@ -10,6 +10,7 @@
       %tr
         %th タイトル
         %th 商品名
+        %th 出品者
         %th 終了日時
         %th 現在の最高入札金額
         %th
@@ -18,6 +19,7 @@
         %tr
           %td= auction.title
           %td= auction.item_name
+          %td= auction.user.email
           %td= auction.close_at
           %td
           %td
