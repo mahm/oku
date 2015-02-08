@@ -15,7 +15,6 @@
     %li{:role => 'presentation'}
       %a{'aria-controls' => 'accepted', 'data-toggle' => 'tab', href: '#accepted', role: 'tab'} 落札
   .tab-content
-    -# TODO: 以下のパーシャルを DRY に書けないだろうか ?
     #unopened.tab-pane.active{role: 'tabpanel'}
       = render 'unopened'
     #opened.tab-pane{role: 'tabpanel'}
