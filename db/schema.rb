@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217062629) do
+ActiveRecord::Schema.define(version: 20150217071444) do
 
   create_table "auctions", force: true do |t|
     t.integer  "user_id",                       null: false
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20150217062629) do
     t.string   "title"
     t.integer  "amount",        default: 1,     null: false
     t.integer "category_id"
+    t.text "explanation"
   end
 
   add_index "auctions", ["category_id"], name: "index_auctions_on_category_id"
