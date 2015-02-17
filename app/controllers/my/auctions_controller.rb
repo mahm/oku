@@ -35,7 +35,6 @@ class My::AuctionsController < My::ApplicationController
   def auction_params
     params.require(:auction).permit(
         :title,
-        :item_name,
         :amount,
         :category_id,
         :open_at,

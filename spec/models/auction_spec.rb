@@ -29,12 +29,6 @@ RSpec.describe Auction, :type => :model do
     expect(auction.errors[:title]).to include("can't be blank")
   end
 
-  it 'is invalid without a item_name' do
-    auction = build(:auction, item_name: nil)
-    auction.valid?
-    expect(auction.errors[:item_name]).to include("can't be blank")
-  end
-
   it 'is invalid without a amount' do
     auction = build(:auction, amount: nil)
     auction.valid?

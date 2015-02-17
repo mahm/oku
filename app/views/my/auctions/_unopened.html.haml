@@ -6,7 +6,6 @@
   %table.table.table-striped
     %thead
       %th タイトル
-      %th 商品名
       %th 開始（予定）日時
       %th 終了予定日時
       %th
@@ -14,7 +13,6 @@
       - unopened_auctions.each do |auction|
         %tr
           %td= auction.title
-          %td= auction.item_name
           %td= auction.open_at
           %td= auction.close_at
           %td
