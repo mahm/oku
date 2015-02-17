@@ -2,12 +2,4 @@
 
 %hr
 
-= simple_form_for(@auction, url: [:my, @auction]) do |f|
-  = f.error_notification
-  .form-controls
-    = f.input :category_id, as: :select, collection: Category.all
-    = f.input :title
-    = f.input :first_price
-    = f.input :open_at
-    = f.input :close_at
-    = f.button :submit
+= render 'form', auction: @auction
