@@ -1,6 +1,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body {
+  padding-bottom: 50px;
+}
+
 h2 {
   font-size: 20px;
   margin: 40px 0 20px 0;
