@@ -1,0 +1,8 @@
+= render 'common/auctions/auction', auction: @auction
+
+%hr
+
+.pull-right
+  - if @auction.open? && user_signed_in?
+    = link_to '入札', edit_my_auction_path, class: 'btn btn-danger'
+  %button.btn.btn-default.js-btn-back 戻る
