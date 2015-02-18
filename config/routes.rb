@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :auctions, only: %i(index)
+  resources :auctions, only: %i(index show)
 
   namespace :my do
     resources :auctions

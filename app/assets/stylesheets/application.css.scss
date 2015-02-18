@@ -5,6 +5,11 @@ body {
   padding-bottom: 50px;
 }
 
+h1 {
+  font-size: 28px;
+  margin-left: 14px;
+}
+
 h2 {
   font-size: 20px;
   margin: 40px 0 20px 0;
@@ -18,5 +23,27 @@ h2 {
   padding: 20px 0 10px 0;
   p {
     padding-left: 2em;
+  }
+}
+
+.widget-title {
+  text-align: center;
+  padding: 10px 0;
+  font-size: 20px;
+}
+
+.auction {
+  border-bottom: 2px solid #e7e7e7;
+  margin-bottom: 20px;
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+  img {
+    margin-left: -5px;
+  }
+  :hover {
+    cursor: pointer;
+    background-color: #e7e7e7;
   }
 }

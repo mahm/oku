@@ -2,26 +2,28 @@
 
 %hr
 
-- if @auctions.blank?
-  %p 現在開催されているオークションは存在しません。
-- else
-  %table.table
-    %thead
-      %tr
-        %th タイトル
-        %th 出品者
-        %th 終了日時
-        %th 現在の最高入札金額
-        %th
-    %tbody
+.row
+  .col-md-3
+    .widget-title カテゴリ選択
+    .list-group
+      = link_to '全て', auctions_path, class: 'list-group-item active'
+      - Category.order(:id).all.each do |category|
+        = link_to category.name, '#', class: 'list-group-item'
+  .col-md-9
+    - if @auctions.blank?
+      %p.text-muted 現在開催されているオークションは存在しません。
+    - else
       - @auctions.each do |auction|
-        %tr
-          %td= auction.title
-          %td= auction.user.email
-          %td= auction.close_at
-          %td
-          %td
+        .auction
+          = link_to [auction] do
             %ul.list-inline
               %li
-                = link_to my_auction_path(auction) do
-                  %span.glyphicon.glyphicon-eye-open
+                %img.img-thumbnail{src: 'http://placeimg.com/150/120/tech'}
+              %li
+                %dl.dl-horizontal
+                  %dt タイトル :
+                  %dd= auction.title
+                  %dt 現在の最高入札金額 :
+                  %dd= "#{auction.highest_price} 円"
+                  %dt 終了日時 :
+                  %dd= auction.close_at
