@@ -16,7 +16,7 @@
       %a{'aria-controls' => 'accepted', 'data-toggle' => 'tab', href: '#accepted', role: 'tab'} 落札分
   .tab-content
     #unopened.tab-pane.active{role: 'tabpanel'}
-      = render 'unopened'
+      = render 'in_ready'
     #opened.tab-pane{role: 'tabpanel'}
       = render 'opened'
     #closed.tab-pane{role: 'tabpanel'}
