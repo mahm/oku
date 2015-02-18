@@ -1,0 +1,69 @@
+%h1
+  = @auction.title
+
+%hr
+
+%h2
+  商品の情報
+.row
+  .col-md-4
+    %img{src: 'http://placeimg.com/300/240/tech'}
+  .col-md-8
+    %table.table.table-bordered
+      %tr
+        %th
+          現在の最高落札価格
+        %td
+          .price
+            = @auction.highest_price
+            円
+      %tr
+        %th
+          現在の入札件数
+        %td
+          = @auction.bids.count
+          件
+      %tr
+        %th
+          オークション ID
+        %td
+          = @auction.id
+      %tr
+        %th
+          出品者
+        %td
+          .auctioneer-name
+            = @auction.user.email
+          .auctioneer-evaluations
+            %ul.list-inline
+              %li
+                %span.glyphicon.glyphicon-thumbs-up
+                良い : 0
+              %li
+                %span.glyphicon.glyphicon-thumbs-down
+                悪い : 0
+          .auctioneer-evaluation-launcher
+            = link_to 'この出品者の全ての評価を見る', ''
+      %tr
+        %th
+          オークション開始日時
+        %td
+          .datetime
+            = @auction.open_at
+      %tr
+        %th
+          オークション終了日時
+        %td
+          .datetime
+            = @auction.close_at
+
+%h2
+  商品の説明
+
+.explanation
+  - if @auction.explanation.blank?
+    %p.text-muted
+      * このオークションには、説明文が登録されていません。
+  - else
+    %p
+      @auction.explanation

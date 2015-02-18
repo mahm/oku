@@ -30,6 +30,10 @@ class Auction < ActiveRecord::Base
     end
   end
 
+  def ready?
+    open_at >= Time.now
+  end
+
   scope :unopened, -> {
     order(:open_at)
     where { (open_at.gt Time.now) }

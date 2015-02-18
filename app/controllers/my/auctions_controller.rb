@@ -1,4 +1,5 @@
 class My::AuctionsController < My::ApplicationController
+  before_action :set_auction, only: %i(show edit)
 
   def index
   end
@@ -42,5 +43,9 @@ class My::AuctionsController < My::ApplicationController
         :first_price,
         :closed,
     )
+  end
+
+  def set_auction
+    @auction = current_user.auctions.find(params[:id])
   end
 end
