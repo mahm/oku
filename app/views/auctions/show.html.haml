@@ -4,5 +4,5 @@
 
 .pull-right
   - if @auction.open? && user_signed_in?
-    = link_to '入札', edit_my_auction_path, class: 'btn btn-danger'
+    = link_to '入札', new_auction_bid_path(@auction), class: 'btn btn-danger'
   %button.btn.btn-default.js-btn-back 戻る
