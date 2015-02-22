@@ -23,12 +23,6 @@ RSpec.describe User, :type => :model do
     expect(user.errors[:password]).to include("can't be blank")
   end
 
-  it 'is invalid with a password less than 7 characters' do
-    user = build(:user, password: 'x' * 7)
-    user.valid?
-    expect(user.errors[:password]).to include("is too short (minimum is 8 characters)")
-  end
-
   describe 'Evaluate other user' do
     let(:evaluater) { create(:user) }
     let(:evaluatee) { create(:user) }
