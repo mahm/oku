@@ -1,2 +1,32 @@
-%h1 Bids#index
-%p Find me in app/views/bids/index.html.haml
+%h1
+  = @auction.title
+  の入札履歴一覧
+
+%hr
+
+%table.table.table.table-hover
+  %thead
+    %tr
+      %th
+        入札日時
+      %th
+        入札者
+      %th
+        入札額
+  %tbody
+    - @bids.each do |bid|
+      %tr
+        %td
+          = bid.created_at
+        %td
+          = bid.user.email
+        %td
+          = bid.price
+          円
+
+%hr
+
+.pull-right
+  %button.btn.btn-default.js-btn-back 戻る
+
+

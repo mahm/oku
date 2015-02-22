@@ -14,9 +14,10 @@
         %th
           現在の最高落札価格
         %td
-          .price
+          %span.price
             = @auction.highest_price
             円
+          = link_to '入札履歴を見る', auction_bids_path(@auction), class: 'label label-info'
       %tr
         %th
           現在の入札件数
