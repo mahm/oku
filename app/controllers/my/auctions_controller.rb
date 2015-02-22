@@ -42,6 +42,7 @@ class My::AuctionsController < My::ApplicationController
         :close_at,
         :first_price,
         :closed,
+        :explanation
     )
   end
 
