@@ -1,12 +1,4 @@
 Rails.application.routes.draw do
-  get 'bids/index'
-
-  get 'bids/new'
-
-  get 'bids/create'
-
-  get 'bids/destroy'
-
   root to: 'home#index'
 
   devise_for :users
