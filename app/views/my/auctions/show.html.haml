@@ -5,4 +5,4 @@
 .pull-right
   - if @auction.in_ready?
     = link_to '編集', edit_my_auction_path, class: 'btn btn-primary'
-  %button.btn.btn-default.js-btn-back 戻る
+  = link_to '戻る', :back, class: 'btn btn-default'
