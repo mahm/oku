@@ -50,4 +50,13 @@ RSpec.describe Bid, :type => :model do
     bid.valid?
     expect(bid.errors[:auction_id]).to include("auction is not open")
   end
+
+  it 'is invalid when price is not highest' do
+    auction = create(:auction, open_at: Time.now + 1.day, close_at: Time.now + 7.day)
+    travel 2.day
+    create(:bid, auction_id: auction.id, price: 100)
+    bid = build(:bid, auction_id: auction.id, price: 99)
+    bid.valid?
+    expect(bid.errors[:price]).to include("price is not highest")
+  end
 end
