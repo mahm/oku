@@ -14,4 +14,9 @@ class Bid < ActiveRecord::Base
       errors.add(:auction_id, 'auction is not open') if auction.open_at > Time.now
     end
   end
+
+  after_save do
+    auction.highest_price = price
+    auction.save
+  end
 end
