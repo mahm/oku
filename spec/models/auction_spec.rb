@@ -40,11 +40,4 @@ RSpec.describe Auction, :type => :model do
     auction.valid?
     expect(auction.errors[:close_at]).to include("invalid close time")
   end
-
-  it 'is invalid when open time, close time is in the past' do
-    auction = build(:auction, open_at: Time.now - 2.day, close_at: Time.now - 1.day)
-    auction.valid?
-    expect(auction.errors[:open_at]).to include("open time can't be in the past")
-    expect(auction.errors[:close_at]).to include("close time can't be in the past")
-  end
 end
