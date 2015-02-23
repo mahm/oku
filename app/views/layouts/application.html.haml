@@ -38,4 +38,10 @@
                   %span.glyphicon.glyphicon-log-in
                   サインイン
     .container
+      - if notice
+        .alert.alert-success
+          = notice
+      - if alert
+        .alert.alert-danger
+          = alert
       = yield
