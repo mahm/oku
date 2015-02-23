@@ -1,4 +1,9 @@
--# TODO: bids から入札中のオークション一覧を取得する処理を記述
+- bidding_auctions = current_user.bidding_auctions.uniq
 
-%p.text-muted
-  入札中のオークションはありません。
+- if bidding_auctions.blank?
+  %p.text-muted
+    入札中のオークションはありません。
+- else
+  - bidding_auctions.each do |auction|
+    %p
+      = auction.title
