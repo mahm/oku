@@ -30,6 +30,10 @@ class Auction < ActiveRecord::Base
     Time.now >= open_at && !closed
   end
 
+  def biddable?(bidder_id)
+    open? && user_id != bidder_id
+  end
+
   scope :in_ready, -> {
     order(:open_at)
     where { (open_at.gt Time.now) }
