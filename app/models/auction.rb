@@ -1,7 +1,8 @@
 class Auction < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user # auctioneer
   belongs_to :category
   has_many :bids
+  has_many :users, through: :bids # 入札者
 
   validates :user_id, presence: true
   validates :open_at, presence: true
