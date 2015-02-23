@@ -1,4 +1,4 @@
-- unopened_auctions = current_user.auctions.in_ready
+- unopened_auctions = current_user.owned_auctions.in_ready
 
 - if unopened_auctions.blank?
   %p.text-muted 出品予定のオークションはありません。
