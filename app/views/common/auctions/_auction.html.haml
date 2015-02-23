@@ -35,6 +35,7 @@
         %td
           .auctioneer-name
             = @auction.user.email
+            = link_to 'この出品者の全ての評価を見る', '#', class: 'label label-info'
           .auctioneer-evaluations
             %ul.list-inline
               %li
@@ -43,8 +44,6 @@
               %li
                 %span.glyphicon.glyphicon-thumbs-down
                 悪い : 0
-          .auctioneer-evaluation-launcher
-            = link_to 'この出品者の全ての評価を見る', '#', class: 'label label-info'
       %tr
         %th
           オークション開始日時
