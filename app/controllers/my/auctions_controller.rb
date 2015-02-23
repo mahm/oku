@@ -15,7 +15,7 @@ class My::AuctionsController < My::ApplicationController
     @auction = current_user.auctions.build(auction_params)
     respond_to do |format|
       if @auction.save
-        format.html { redirect_to my_auctions_path, notice: 'オークションが作成されました。' }
+        format.html { redirect_to my_auctions_path, notice: "新規オークション「#{@auction.title}」が作成されました。" }
       else
         format.html { render :new }
       end
