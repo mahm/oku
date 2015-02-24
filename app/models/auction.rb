@@ -47,4 +47,7 @@ class Auction < ActiveRecord::Base
     order('close_at DESC')
     where { (closed.eq true) }
   }
+  scope :must_be_close, -> {
+    where { (close_at.lteq Time.now) & (closed.eq false) }
+  }
 end
