@@ -34,6 +34,10 @@ class Auction < ActiveRecord::Base
     open? && user_id != bidder_id
   end
 
+  def highest_price
+    bids.maximum(:price) || 0
+  end
+
   scope :in_ready, -> {
     order(:open_at)
     where { (open_at.gt Time.now) }
