@@ -15,6 +15,9 @@ Bundler.require(*Rails.groups)
 
 module Oku
   class Application < Rails::Application
+    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+
     config.generators.helper false
     config.generators.assets false
     config.generators.request_specs false
