@@ -8,11 +8,11 @@ class My::AuctionsController < My::ApplicationController
   end
 
   def new
-    @auction = current_user.auctions.build
+    @auction = current_user.owned_auctions.build
   end
 
   def create
-    @auction = current_user.auctions.build(auction_params)
+    @auction = current_user.owned_auctions.build(auction_params)
     respond_to do |format|
       if @auction.save
         format.html { redirect_to my_auctions_path, notice: "新規オークション「#{@auction.title}」が作成されました。" }
