@@ -15,15 +15,20 @@
           現在の最高入札価格
         %td
           %span.price
-            = @auction.highest_price
-            円
+            - if @auction.bids.count.zero?
+              %span.text-muted
+                入札履歴がありません
+            - else
+              = @auction.highest_price
+              円
       %tr
         %th
           現在の入札件数
         %td
           = @auction.bids.count
           件
-          = link_to '入札履歴を見る', auction_bids_path(@auction), class: 'label label-info'
+          - unless @auction.bids.count.zero?
+            = link_to '入札履歴を見る', auction_bids_path(@auction), class: 'label label-info'
       %tr
         %th
           オークション ID
