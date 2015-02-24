@@ -11,19 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217071444) do
+ActiveRecord::Schema.define(version: 20150224140005) do
 
   create_table "auctions", force: true do |t|
-    t.integer  "user_id",                       null: false
-    t.datetime "open_at",                       null: false
-    t.datetime "close_at",                      null: false
-    t.integer  "first_price",   default: 0,     null: false
-    t.integer  "highest_price", default: 0,     null: false
-    t.boolean  "closed",        default: false, null: false
+    t.integer "user_id", null: false
+    t.datetime "open_at", null: false
+    t.datetime "close_at", null: false
+    t.integer "first_price", default: 0, null: false
+    t.boolean "closed", default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
-    t.integer  "amount",        default: 1,     null: false
+    t.integer "amount", default: 1, null: false
     t.integer "category_id"
     t.text "explanation"
   end
