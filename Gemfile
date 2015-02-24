@@ -17,6 +17,7 @@ gem 'kaminari'
 gem 'simple_form'
 gem 'squeel'
 gem 'devise'
+gem 'whenever', require: false
 
 group :development do
   gem 'better_errors'
