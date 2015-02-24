@@ -7,7 +7,7 @@ class Bid < ActiveRecord::Base
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   validate :auction_is_in_time
-  validate :highest_price
+  validate :price_is_highest
 
   def auction_is_in_time
     unless auction_id.blank?
@@ -16,14 +16,9 @@ class Bid < ActiveRecord::Base
     end
   end
 
-  def highest_price
+  def price_is_highest
     unless auction.blank? || price.blank?
-      errors.add(:price, 'price is not highest') if auction.highest_price >= price
+      errors.add(:price, 'price is not highest') if auction.price_is_highest >= price
     end
-  end
-
-  after_save do
-    auction.highest_price = price
-    auction.save
   end
 end
