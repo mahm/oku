@@ -19,7 +19,7 @@
               %span.text-muted
                 入札履歴がありません
             - else
-              = @auction.highest_price
+              = number_with_delimiter(@auction.highest_price)
               円
       %tr
         %th
@@ -70,6 +70,4 @@
     %p.text-muted
       * このオークションには、説明文が登録されていません。
   - else
-    %p
-      %pre
-        = @auction.explanation
+    = simple_format(@auction.explanation)
