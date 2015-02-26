@@ -6,7 +6,8 @@
 .well
   %p
     現在の入札最高額は、
-    %span.highest-price= @bid.auction.highest_price
+    %span.highest-price
+      = number_with_delimiter(@bid.auction.highest_price)
     円です。
   %p
     これよりも 1 円以上多い金額を入力し、「入札」ボタンを押して下さい。
@@ -15,4 +16,6 @@
   = f.error_notification
   .form-controls
     = f.input :price
+  .form-controls.pull-right
     = f.button :submit, '入札', class: 'btn btn-primary'
+    = link_to 'キャンセル', auction_path(@auction), class: 'btn btn-default'
