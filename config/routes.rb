@@ -3,8 +3,10 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :auctions, only: %i(index show) do
-    resources :bids, only: %i(index new create)
+  resources :category, only: %i() do
+    resources :auctions, only: %i(index show) do
+      resources :bids, only: %i(index new create)
+    end
   end
 
   namespace :my do
