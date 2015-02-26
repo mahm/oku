@@ -1,3 +1,17 @@
+- if @auction.closed
+  .alert.alert-warning
+    このオークションは終了しました
+- else
+  - if user_signed_in?
+    - if current_user.id == @auction.user_id
+      .alert.alert-info
+        これは、あなたが開催しているオークションです。自分のオークションに入札はできません。
+  - else
+    - if @auction.open?
+      .alert.alert-info
+        = link_to 'サインイン', new_user_session_path, class: 'btn btn-link'
+        すると、このオークションに入札できます。
+
 %h1
   = @auction.title
 
@@ -21,6 +35,9 @@
             - else
               = number_with_delimiter(@auction.highest_price)
               円
+            - if user_signed_in?
+              - if @auction.biddable?(current_user.id)
+                = link_to '入札する', new_auction_bid_path(@auction), class: 'label label-danger'
       %tr
         %th
           現在の入札件数

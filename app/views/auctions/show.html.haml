@@ -3,12 +3,4 @@
 %hr
 
 .pull-right
-  - if user_signed_in?
-    - if @auction.biddable?(current_user.id)
-      = link_to '入札', new_auction_bid_path(@auction), class: 'btn btn-danger'
-  - else
-    - if @auction.open?
-      %span.text-muted
-        = link_to 'サインイン', new_user_session_path, class: 'btn btn-link'
-        すると、入札できます
   = link_to '戻る', :back, class: 'btn btn-default'
