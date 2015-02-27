@@ -1,2 +1,33 @@
-%h1 Home#index
-%p Find me in app/views/home/index.html.haml
+%h1.hide
+  home
+
+.row
+  .col-md-3
+    %h2
+      キーワード検索
+    %p.text-muted
+      ransack の検索フォームをここに
+    %h2
+      カテゴリから検索
+    .list-group
+      - Category.all.each do |category|
+        = link_to(category.name, category_auctions_path(category), class: 'list-group-item')
+  .col-md-9
+    %h2
+      本サイトについて
+    %hr
+    %p
+      - if Auction.opened.size.zero?
+        現在開催されているオークションはありません。
+      - else
+        現在、
+        = Auction.opened.size
+        件のオークションが開催されています。
+    %p
+      左側のキワード、もしくはカテゴリから、現在開催されているオークションを検索して下さい。
+    - unless user_signed_in?
+      %hr
+      %p
+        ユーザー登録を行う事でオークションに参加できます。
+      %p
+        = link_to 'ユーザー登録はこちら', new_user_registration_path, class: 'btn btn-primary'
