@@ -1,5 +1,5 @@
 class My::AuctionsController < My::ApplicationController
-  before_action :set_auction, only: %i(show edit)
+  before_action :set_auction, only: %i(show edit update)
 
   def index
   end
@@ -26,6 +26,13 @@ class My::AuctionsController < My::ApplicationController
   end
 
   def update
+    respond_to do |format|
+      if @auction.update(auction_params)
+        format.html { redirect_to my_auctions_path, notice: "「#{@auction.title}」が変更されました。" }
+      else
+        format.html { render :edit }
+      end
+    end
   end
 
   def destroy
