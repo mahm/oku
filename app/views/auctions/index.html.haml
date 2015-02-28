@@ -1,21 +1,22 @@
-%h1 オークション 一覧
+%h1
+  「
+  = @category.name
+  」
+  のオークション 一覧
 
 %hr
 
 .row
   .col-md-3
-    .widget-title カテゴリ選択
-    .list-group
-      = link_to '全て', auctions_path, class: 'list-group-item active'
-      - Category.order(:id).all.each do |category|
-        = link_to category.name, '#', class: 'list-group-item'
+    = render 'common/categories/categories'
   .col-md-9
     - if @auctions.blank?
-      %p.text-muted 現在開催されているオークションは存在しません。
+      %p.text-muted
+        このカテゴリで、現在開催されているオークションは存在しません。
     - else
       - @auctions.each do |auction|
         .auction
-          = link_to [auction] do
+          = link_to [auction.category, auction] do
             %ul.list-inline
               %li
                 %img.img-thumbnail{src: 'http://placeimg.com/150/120/tech'}

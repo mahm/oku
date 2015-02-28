@@ -7,11 +7,7 @@
       キーワード検索
     %p.text-muted
       ransack の検索フォームをここに
-    %h2
-      カテゴリから検索
-    .list-group
-      - Category.all.each do |category|
-        = link_to(category.name, category_auctions_path(category), class: 'list-group-item')
+    = render 'common/categories/categories'
   .col-md-9
     %h2
       本サイトについて

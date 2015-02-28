@@ -1,8 +1,9 @@
 class AuctionsController < ApplicationController
+  before_action :set_category
   before_action :set_auction, only: %i(show)
 
   def index
-    @auctions = Auction.opened.all
+    @auctions = @category.auctions.opened
   end
 
   def show
@@ -11,6 +12,10 @@ class AuctionsController < ApplicationController
   private
 
   def set_auction
-    @auction = Auction.find(params[:id])
+    @auction = @category.auctions.find(params[:id])
+  end
+
+  def set_category
+    @category = Category.find(params[:category_id])
   end
 end
