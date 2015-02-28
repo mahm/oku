@@ -1,15 +1,10 @@
-%h1
-  「
-  = @category.name
-  」
-  のオークション 一覧
-
-%hr
-
 .row
   .col-md-3
     = render 'common/categories/categories'
   .col-md-9
+    %h1
+      = "「#{@category.name}」のオークション 一覧"
+    %hr
     - if @auctions.blank?
       %p.text-muted
         このカテゴリで、現在開催されているオークションは存在しません。
