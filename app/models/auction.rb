@@ -38,6 +38,15 @@ class Auction < ActiveRecord::Base
     bids.maximum(:price) || 0
   end
 
+  def accept_and_close
+    if highest_bid = bids.order(price: :desc).first
+      highest_bid.accepted = true
+      highest_bid.save!
+    end
+    self.closed = true
+    save!
+  end
+
   scope :in_ready, -> {
     order(:open_at)
     where { (open_at.gt Time.now) }

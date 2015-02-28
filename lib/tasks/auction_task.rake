@@ -4,8 +4,7 @@ namespace :auction_task do
 
   task close: :environment do
     Auction.must_be_close.each do |auction|
-      auction.closed = true
-      if auction.save
+      if auction.accept_and_close
         Rails.logger.info("オークション ID #{auction.id} を終了しました")
       else
         Rails.logger.error("オークション ID #{auction.id} の終了処理が失敗しました")

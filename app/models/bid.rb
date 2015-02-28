@@ -11,13 +11,13 @@ class Bid < ActiveRecord::Base
 
   def auction_is_in_time
     unless auction_id.blank?
-      errors.add(:auction_id, 'auction is over') if Time.now >= auction.close_at
+      errors.add(:auction_id, 'auction is over') if Time.now >= auction.close_at && !accepted
       errors.add(:auction_id, 'auction is not open') if auction.open_at > Time.now
     end
   end
 
   def price_is_highest
-    unless auction.blank? || price.blank?
+    unless auction.blank? || price.blank? || accepted
       errors.add(:price, 'price is not highest') if auction.bids.maximum(:price).to_i >= price
     end
   end
