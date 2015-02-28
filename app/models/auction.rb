@@ -47,6 +47,10 @@ class Auction < ActiveRecord::Base
     save!
   end
 
+  def accepted_price
+    bids.where(accepted: true).first.price if bids.present?
+  end
+
   scope :in_ready, -> {
     order(:open_at)
     where { (open_at.gt Time.now) }

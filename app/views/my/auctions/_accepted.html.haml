@@ -1,4 +1,19 @@
--# TODO: 自分が落札したオークション一覧を取得する処理を記述
+- accepted_auctions = current_user.accepted_auctions.uniq
 
-%p.text-muted
-  落札できたオークションはありません。
+- if accepted_auctions.blank?
+  %p.text-muted
+    入札中のオークションはありません。
+- else
+  %table.table.table-striped
+    %thead
+      %th タイトル
+      %th 開始日時
+      %th 終了予定日時
+      %th 落札価格
+    %tbody
+      - accepted_auctions.each do |auction|
+        %tr
+          %td= auction.title
+          %td= auction.open_at
+          %td= auction.close_at
+          %td= "#{number_with_delimiter(auction.accepted_price)} 円"
