@@ -47,6 +47,6 @@ class My::AuctionsController < My::ApplicationController
   end
 
   def set_auction
-    @auction = current_user.auctions.find(params[:id])
+    @auction = current_user.owned_auctions.find(params[:id])
   end
 end
