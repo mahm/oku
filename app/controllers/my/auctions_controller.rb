@@ -1,5 +1,5 @@
 class My::AuctionsController < My::ApplicationController
-  before_action :set_auction, only: %i(show edit update)
+  before_action :set_auction, only: %i(show edit update destroy)
 
   def index
   end
@@ -36,6 +36,10 @@ class My::AuctionsController < My::ApplicationController
   end
 
   def destroy
+    @auction.destroy
+    respond_to do |format|
+      format.html { redirect_to [:my, :auctions], notice: 'オークションを削除しました。' }
+    end
   end
 
   private

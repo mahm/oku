@@ -5,4 +5,5 @@
 .pull-right
   - if @auction.in_ready?
     = link_to '編集', [:edit, :my, @auction], class: 'btn btn-primary'
+    = link_to '削除', [:my, @auction], method: :delete, class: 'btn btn-danger'
   = link_to '戻る', :back, class: 'btn btn-default'

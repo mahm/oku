@@ -70,4 +70,8 @@ class Auction < ActiveRecord::Base
   scope :must_be_close, -> {
     where { (close_at.lteq Time.now) & (closed.eq false) }
   }
+
+  before_destroy do
+    in_ready?
+  end
 end
