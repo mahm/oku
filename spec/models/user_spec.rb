@@ -24,6 +24,7 @@ RSpec.describe User, :type => :model do
   end
 
   describe 'Evaluate other user' do
+    let(:auction) { create(:auction) }
     let(:evaluater) { create(:user) }
     let(:evaluatee) { create(:user) }
     let(:comment) {
@@ -37,7 +38,7 @@ RSpec.describe User, :type => :model do
     }
 
     it 'should be success when a user is not evaluate other user yet' do
-      evaluater.evaluate!(evaluatee, comment)
+      evaluater.evaluate!(auction, evaluatee, comment)
       expect(evaluater).to be_evaluate(evaluatee)
       expect(evaluater.evaluatees).to include(evaluatee)
       expect(evaluatee.evaluaters).to include(evaluater)

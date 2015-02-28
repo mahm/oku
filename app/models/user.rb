@@ -16,8 +16,8 @@ class User < ActiveRecord::Base
     evaluations.find_by(evaluatee_id: other_user.id)
   end
 
-  def evaluate!(other_user, comment)
-    evaluations.create!(evaluatee_id: other_user.id, comment: comment)
+  def evaluate!(auction, other_user, comment)
+    evaluations.create!(auction_id: auction.id, evaluatee_id: other_user.id, comment: comment)
   end
 
   def accepted_auctions
