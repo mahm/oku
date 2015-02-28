@@ -1,4 +1,4 @@
-- bidding_auctions = current_user.bidding_auctions.uniq
+- bidding_auctions = current_user.bidding_auctions.where(closed: false).uniq
 
 - if bidding_auctions.blank?
   %p.text-muted
@@ -7,7 +7,7 @@
   %table.table.table-striped
     %thead
       %th タイトル
-      %th 開始（予定）日時
+      %th 開始日時
       %th 終了予定日時
     %tbody
       - bidding_auctions.each do |auction|
