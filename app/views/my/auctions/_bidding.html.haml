@@ -4,6 +4,14 @@
   %p.text-muted
     入札中のオークションはありません。
 - else
-  - bidding_auctions.each do |auction|
-    %p
-      = auction.title
+  %table.table.table-striped
+    %thead
+      %th タイトル
+      %th 開始（予定）日時
+      %th 終了予定日時
+    %tbody
+      - bidding_auctions.each do |auction|
+        %tr
+          %td= auction.title
+          %td= auction.open_at
+          %td= auction.close_at
