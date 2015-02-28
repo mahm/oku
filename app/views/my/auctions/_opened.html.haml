@@ -10,6 +10,7 @@
       %th タイトル
       %th 開始日時
       %th 終了予定日時
+      %th 詳細
     %tbody
       - opened_auctions.each do |auction|
         %tr
@@ -17,3 +18,4 @@
           %td= auction.title
           %td= auction.open_at
           %td= auction.close_at
+          %td= link_to '詳細表示', [:my, auction], class: 'label label-primary'

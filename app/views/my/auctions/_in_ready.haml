@@ -3,26 +3,18 @@
 - if unopened_auctions.blank?
   %p.text-muted 出品予定のオークションはありません。
 - else
-  %table.table.table-striped
+  %table.table.table-striped.table-my-auction
     %thead
       %th タイトル
       %th 開始（予定）日時
       %th 終了予定日時
-      %th
+      %th 出品者
+      %th 詳細
     %tbody
       - unopened_auctions.each do |auction|
         %tr
           %td= auction.title
           %td= auction.open_at
           %td= auction.close_at
-          %td
-            %ul.list-inline
-              %li
-                = link_to my_auction_path(auction) do
-                  %span.glyphicon.glyphicon-eye-open
-              %li
-                = link_to edit_my_auction_path(auction) do
-                  %span.glyphicon.glyphicon-pencil
-              %li
-                = link_to edit_my_auction_path(auction) do
-                  %span.glyphicon.glyphicon-remove
+          %td= auction.user.email
+          %td= link_to '詳細表示', [:my, auction], class: 'label label-primary'
