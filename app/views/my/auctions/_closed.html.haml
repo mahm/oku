@@ -9,6 +9,7 @@
       %th タイトル
       %th 開始日時
       %th 終了日時
+      %th 落札者
       %th 落札価格
     %tbody
       - closed_auctions.each do |auction|
@@ -16,6 +17,9 @@
           %td= auction.title
           %td= auction.open_at
           %td= auction.close_at
-          %td= auction.highest_price
-
-          -# TODO: 落札者を一覧表に表示
+          - if auction.successful_bidder.blank?
+            %td= auction.successful_bidder || '入札なし'
+            %td
+          - else
+            %td= auction.successful_bidder
+            %td= "#{number_with_delimiter(auction.accepted_price)} 円"

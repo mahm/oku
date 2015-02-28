@@ -51,6 +51,10 @@ class Auction < ActiveRecord::Base
     bids.where(accepted: true).first.price if bids.present?
   end
 
+  def successful_bidder
+    bids.where(accepted: true).first.user.email if bids.present?
+  end
+
   scope :in_ready, -> {
     order(:open_at)
     where { (open_at.gt Time.now) }
