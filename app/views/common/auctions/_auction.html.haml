@@ -37,7 +37,7 @@
               円
             - if user_signed_in?
               - if @auction.biddable?(current_user.id)
-                = link_to '入札する', new_auction_bid_path(@auction), class: 'label label-danger'
+                = link_to '入札する', [:new, @auction.category, @auction, :bid], class: 'label label-danger'
       %tr
         %th
           現在の入札件数
@@ -45,7 +45,7 @@
           = @auction.bids.count
           件
           - unless @auction.bids.count.zero?
-            = link_to '入札履歴を見る', auction_bids_path(@auction), class: 'label label-info'
+            = link_to '入札履歴を見る', [@auction.category, @auction, :bids], class: 'label label-info'
       %tr
         %th
           オークション ID

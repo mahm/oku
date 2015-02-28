@@ -14,7 +14,7 @@ class BidsController < ApplicationController
     @bid.user_id = current_user.id
     respond_to do |format|
       if @bid.save
-        format.html { redirect_to @bid.auction, notice: "#{@bid.price} 円で入札しました。" }
+        format.html { redirect_to [@bid.auction.category, @bid.auction], notice: "#{@bid.price} 円で入札しました。" }
       else
         format.html { render :new }
       end

@@ -18,7 +18,7 @@ class Bid < ActiveRecord::Base
 
   def price_is_highest
     unless auction.blank? || price.blank?
-      errors.add(:price, 'price is not highest') if auction.bids.maximum(:price) >= price
+      errors.add(:price, 'price is not highest') if auction.bids.maximum(:price).to_i >= price
     end
   end
 end

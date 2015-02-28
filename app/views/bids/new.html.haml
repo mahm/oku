@@ -12,10 +12,10 @@
   %p
     これよりも 1 円以上多い金額を入力し、「入札」ボタンを押して下さい。
 
-= simple_form_for([@auction, @bid]) do |f|
+= simple_form_for([@bid.auction.category, @bid.auction, @bid]) do |f|
   = f.error_notification
   .form-controls
     = f.input :price
   .form-controls.pull-right
     = f.button :submit, '入札', class: 'btn btn-primary'
-    = link_to 'キャンセル', auction_path(@auction), class: 'btn btn-default'
+    = link_to 'キャンセル', [@bid.auction.category, @bid.auction], class: 'btn btn-default'
