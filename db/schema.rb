@@ -14,29 +14,29 @@
 ActiveRecord::Schema.define(version: 20150228105252) do
 
   create_table "auctions", force: true do |t|
-    t.integer "user_id", null: false
-    t.datetime "open_at", null: false
-    t.datetime "close_at", null: false
-    t.integer "first_price", default: 0, null: false
-    t.boolean "closed", default: false, null: false
+    t.integer  "user_id",                     null: false
+    t.datetime "open_at",                     null: false
+    t.datetime "close_at",                    null: false
+    t.integer  "first_price", default: 0,     null: false
+    t.boolean  "closed",      default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
-    t.integer "amount", default: 1, null: false
-    t.integer "category_id"
-    t.text "explanation"
+    t.integer  "amount",      default: 1,     null: false
+    t.integer  "category_id"
+    t.text     "explanation"
   end
 
   add_index "auctions", ["category_id"], name: "index_auctions_on_category_id"
   add_index "auctions", ["user_id"], name: "index_auctions_on_user_id"
 
   create_table "bids", force: true do |t|
-    t.integer "auction_id", null: false
-    t.integer "user_id", null: false
-    t.integer "price", null: false
+    t.integer  "auction_id",                 null: false
+    t.integer  "user_id",                    null: false
+    t.integer  "price",                      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean "accepted", default: false
+    t.boolean  "accepted",   default: false
   end
 
   add_index "bids", ["auction_id"], name: "index_bids_on_auction_id"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150228105252) do
     t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "auction_id"
+    t.integer  "auction_id"
   end
 
   add_index "evaluations", ["auction_id"], name: "index_evaluations_on_auction_id"
