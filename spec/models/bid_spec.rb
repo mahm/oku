@@ -67,4 +67,11 @@ RSpec.describe Bid, :type => :model do
     bid.valid?
     expect(bid.errors[:price]).to include("price is not highest")
   end
+
+  it '開始価格以下の入札はできない' do
+    auction = create(:auction, open_at: Time.now, close_at: Time.now + 7.day, first_price: 10)
+    bid = build(:bid, auction_id: auction.id, price: 9)
+    bid.valid?
+    expect(bid.errors[:price]).to include("price is not highest")
+  end
 end
