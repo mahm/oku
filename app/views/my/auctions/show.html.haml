@@ -8,4 +8,4 @@
     = link_to '削除', [:my, @auction], method: :delete, class: 'btn btn-danger'
   - if @auction.closed
     = link_to 'この出品者を評価する', [:new, @auction.user_id, :evaluation], class: 'btn btn-primary btn-block'
-  = link_to '戻る', :back, class: 'btn btn-default'
+  = link_to '戻る', [:my, :auctions], class: 'btn btn-default'
