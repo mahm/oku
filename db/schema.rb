@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150228105252) do
+ActiveRecord::Schema.define(version: 20150302083556) do
 
   create_table "auctions", force: true do |t|
     t.integer  "user_id",                     null: false
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20150228105252) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "auction_id"
+    t.integer  "point",        default: 0
   end
 
   add_index "evaluations", ["auction_id"], name: "index_evaluations_on_auction_id"
