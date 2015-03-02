@@ -1,5 +1,5 @@
-= render 'common/auctions/messages/closed', auction: @auction if @auction.close?
-= render 'common/auctions/messages/open', auction: @auction if @auction.open?
+= render 'common/auctions/messages/closed' if @auction.close?
+= render 'common/auctions/messages/open' if @auction.open?
 
 %h1
   = @auction.title
