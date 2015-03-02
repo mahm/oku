@@ -1,30 +1,19 @@
-%h1.hide
-  home
+- @auctions = Auction.opened
 
 .row
   .col-md-3
     = render 'common/categories/index'
   .col-md-9
-    %h2
-      本サイトについて
+    %h1
+      オークション 一覧
     %hr
-      - if Auction.opened.size.zero?
-        %p
-          現在開催されているオークションはありません。
-      - else
-        %p
-          現在、
-          = Auction.opened.size
-          件のオークションが開催されています。
-        %p
-          左側のカテゴリ一覧から、現在開催されているオークションを検索して下さい。
-    - unless user_signed_in?
+    - if @auctions.size.zero?
+      %p
+        現在開催されているオークションはありません。
+    - else
+      %p
+        現在、
+        = @auctions.size
+        件のオークションが開催されています。
       %hr
-      %p
-        ユーザー登録を行う事でオークションに参加できます。
-      %p
-        = link_to 'ユーザー登録はこちら', new_user_registration_path, class: 'btn btn-primary btn-block'
-      %p
-        既にユーザー登録がお済みの方は、以下よりサインインを行って下さい。
-      %p
-        = link_to 'サインイン', new_user_session_path, class: 'btn btn-primary btn-block'
+      = render 'common/auctions/index'

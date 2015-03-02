@@ -1,0 +1,14 @@
+- @auctions.each do |auction|
+  .auction
+    = link_to [auction.category, auction] do
+      %ul.list-inline
+        %li
+          %img.img-thumbnail{src: 'http://placeimg.com/150/120/tech'}
+        %li
+          %dl.dl-horizontal
+            %dt タイトル :
+            %dd= auction.title
+            %dt 現在の最高入札金額 :
+            %dd= "#{auction.highest_price} 円"
+            %dt 終了日時 :
+            %dd= auction.close_at
