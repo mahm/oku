@@ -15,8 +15,6 @@ class EvaluationsController < ApplicationController
 
   def create
     @evaluation = @auction.evaluations.build(evaluation_params)
-    @evaluation.evaluatee_id = @auction.user.id
-    @evaluation.evaluater_id = current_user.id
     respond_to do |format|
       if @evaluation.save
         format.html { redirect_to [@auction.category, @auction], notice: "#{@evaluation.evaluatee.email} への評価を登録しました。" }
@@ -50,6 +48,8 @@ class EvaluationsController < ApplicationController
 
   def evaluation_params
     params.require(:evaluation).permit(:comment)
+    @evaluation.evaluatee_id = @auction.user.id
+    @evaluation.evaluater_id = current_user.id
   end
 
   def set_auction
