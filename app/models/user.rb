@@ -12,14 +12,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def evaluate?(other_user)
-    evaluations.find_by(evaluatee_id: other_user.id)
-  end
-
-  def evaluate!(auction, other_user, comment)
-    evaluations.create!(auction_id: auction.id, evaluatee_id: other_user.id, comment: comment)
-  end
-
   def accepted_auctions
     auctions = []
     Bid.where(accepted: true, user_id: self.id).each do |bid|

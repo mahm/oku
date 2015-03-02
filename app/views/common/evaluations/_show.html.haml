@@ -1,0 +1,9 @@
+.panel.panel-default
+  .panel-heading
+    = evaluation.auction.title
+  .panel-body
+    = simple_format(evaluation.try(:comment))
+  - if evaluation.evaluater_id == current_user.id
+    .panel-footer
+      = link_to '訂正', [:edit, evaluation.auction.category, evaluation.auction, evaluation], class: 'btn btn-primary'
+      = link_to '取下', [evaluation.auction.category, evaluation.auction, evaluation], class: 'btn btn-danger', method: 'DELETE'

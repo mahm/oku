@@ -1,0 +1,8 @@
+- if user_signed_in?
+  - if current_user.id == @auction.user_id
+    .alert.alert-info
+      これは、あなたが開催しているオークションです。自分のオークションに入札はできません。
+- else
+  .alert.alert-info
+    = link_to 'サインイン', new_user_session_path, class: 'btn btn-link'
+    すると、このオークションに入札できます。

@@ -3,6 +3,7 @@ class Auction < ActiveRecord::Base
   belongs_to :category
   has_many :bids
   has_many :users, through: :bids # 入札者
+  has_many :evaluations
 
   validates :user_id, presence: true
   validates :open_at, presence: true
@@ -30,6 +31,10 @@ class Auction < ActiveRecord::Base
     Time.now >= open_at && !closed
   end
 
+  def close?
+    self.closed
+  end
+
   def biddable?(bidder_id)
     open? && user_id != bidder_id
   end
@@ -47,12 +52,20 @@ class Auction < ActiveRecord::Base
     save!
   end
 
+  def already_evaluated_by?(evaluater_id)
+    Evaluation.where(auction_id: self.id, evaluater_id: evaluater_id).exists?
+  end
+
   def accepted_price
     bids.where(accepted: true).first.price if bids.present?
   end
 
   def successful_bidder
     bids.where(accepted: true).first.user.email if bids.present?
+  end
+
+  def accepted_by?(user_id)
+    bids.where(accepted: true).first.user.id == user_id if bids.present?
   end
 
   scope :in_ready, -> {

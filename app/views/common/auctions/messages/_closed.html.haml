@@ -1,0 +1,23 @@
+- if user_signed_in?
+  - if @auction.accepted_by?(current_user.id)
+    .alert.alert-info
+      %p
+        おめでとうございます！
+      %p
+        このオークションは、あなたが落札しました。
+    - if @auction.already_evaluated_by? current_user.id
+      %p
+        あなたはこの出品者を以下の通り評価しました。
+      = render 'common/evaluations/show', evaluation: @auction.evaluations.find_by_evaluater_id(current_user.id)
+    - else
+      %p
+        出品者を評価する場合は、下のボタンをクリックしてください.
+      = link_to '出品者を評価する', [:new, @auction.category, @auction, :evaluation], class: 'btn btn-primary btn-block'
+  - else
+    .alert.alert-warning
+      このオークションは、終了しました。
+- else
+  .alert.alert-warning
+    このオークションは、終了しました。
+
+%hr

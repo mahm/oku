@@ -1,16 +1,5 @@
-- if @auction.closed
-  .alert.alert-warning
-    このオークションは終了しました
-- else
-  - if user_signed_in?
-    - if current_user.id == @auction.user_id
-      .alert.alert-info
-        これは、あなたが開催しているオークションです。自分のオークションに入札はできません。
-  - else
-    - if @auction.open?
-      .alert.alert-info
-        = link_to 'サインイン', new_user_session_path, class: 'btn btn-link'
-        すると、このオークションに入札できます。
+= render 'common/auctions/messages/closed', auction: @auction if @auction.close?
+= render 'common/auctions/messages/open', auction: @auction if @auction.open?
 
 %h1
   = @auction.title
@@ -28,7 +17,7 @@
         %th
           開始価格
         %td
-          = @auction.first_price
+          = "#{number_with_delimiter(@auction.first_price)} 円"
       %tr
         %th
           現在の最高入札価格
@@ -62,7 +51,7 @@
         %td
           .auctioneer-name
             = @auction.user.email
-            = link_to 'この出品者の全ての評価を見る', '#', class: 'label label-info'
+            = link_to 'この出品者の全ての評価を見る', [@auction.user, :evaluations], class: 'label label-info'
           .auctioneer-evaluations
             %ul.list-inline
               %li

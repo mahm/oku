@@ -1,2 +1,12 @@
-%h1 Evaluations#index
-%p Find me in app/views/evaluations/index.html.haml
+%h1
+  = @evaluatee.email
+  さんの評価一覧
+
+%hr
+
+- if @evaluations.blank?
+  %p.text-muted
+    評価はまだありません。
+- else
+  - @evaluations.each do |evaluation|
+    = render 'common/evaluations/show', evaluation: evaluation

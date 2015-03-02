@@ -1,2 +1,5 @@
-%h1 Evaluations#new
-%p Find me in app/views/evaluations/new.html.haml
+%h1
+  = @evaluation.evaluatee.email
+  への評価作成
+%hr
+= render 'form'

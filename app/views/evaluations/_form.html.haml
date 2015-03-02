@@ -1,0 +1,9 @@
+%h2
+  オークション名 :
+  = @evaluation.auction.title
+= simple_form_for([@evaluation.auction.category, @evaluation.auction, @evaluation]) do |f|
+  = f.error_notification
+  .form-controls
+    = f.input :comment, label: '出品者へのコメントがあれば入力してください'
+  .form-controls.pull-right
+    = f.button :submit, '評価登録', class: 'btn btn-primary'
