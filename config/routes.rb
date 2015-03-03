@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :my do
+  get 'evaluations/index'
+  end
+
   root to: 'home#index'
 
   devise_for :users

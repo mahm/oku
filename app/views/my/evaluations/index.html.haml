@@ -1,0 +1,11 @@
+%h1
+  あなたへの評価 一覧
+
+%hr
+
+- if current_user.evaluaters.blank?
+  %p.text-muted
+    あなたへの評価はまだありません。
+- else
+  - current_user.evaluaters.each do |evaluater|
+    = render 'common/evaluations/show', evaluation: evaluater.evaluations.try(:first)
