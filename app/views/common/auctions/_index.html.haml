@@ -3,7 +3,11 @@
     = link_to [auction.category, auction] do
       %ul.list-inline
         %li
-          %img.img-thumbnail{src: 'http://placeimg.com/150/120/tech'}
+          -#%img.img-thumbnail{src: 'http://placeimg.com/150/120/tech'}
+          - if auction.picture?
+            = image_tag auction.picture.url, size: '150x120'
+          - else
+            = image_tag 'http://placehold.jp/888/fefefe/150x120.png?text=NO%20IMAGE'
         %li
           %dl.dl-horizontal
             %dt タイトル :

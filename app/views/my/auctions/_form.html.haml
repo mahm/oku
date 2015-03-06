@@ -3,6 +3,7 @@
   .form-controls
     = f.input :category_id, as: :select, collection: Category.all
     = f.input :title
+    = f.input :picture, as: :file
     = f.input :explanation
     = f.input :first_price
     = f.input :open_at

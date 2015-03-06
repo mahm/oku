@@ -5,6 +5,8 @@ class Auction < ActiveRecord::Base
   has_many :users, through: :bids # 入札者
   has_many :evaluations
 
+  mount_uploader :picture, ItemPictureUploader
+
   validates :user_id, presence: true
   validates :open_at, presence: true
   validates :close_at, presence: true

@@ -10,7 +10,10 @@
   商品の情報
 .row
   .col-md-4
-    %img{src: 'http://placeimg.com/300/240/tech'}
+    - if @auction.picture?
+      = image_tag @auction.picture.url, size: '300x240'
+    - else
+      = image_tag 'http://placehold.jp/888/fefefe/300x240.png?text=NO%20IMAGE'
   .col-md-8
     %table.table.table-bordered
       %tr
