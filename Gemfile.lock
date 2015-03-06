@@ -83,6 +83,8 @@ GEM
       i18n (~> 0.5)
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
+    gretel (3.0.8)
+      rails (>= 3.2.0)
     haml (4.1.0.beta.1)
       tilt
     haml-rails (0.6.0)
@@ -233,6 +235,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.5)
   faker
   font-awesome-rails
+  gretel
   haml-rails
   hirb
   hirb-unicode

@@ -19,6 +19,7 @@ gem 'squeel'
 gem 'devise'
 gem 'whenever', require: false
 gem 'enumerize'
+gem 'gretel'
 
 group :development do
   gem 'better_errors'
