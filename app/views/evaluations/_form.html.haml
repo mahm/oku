@@ -8,3 +8,4 @@
     = f.input :comment, label: '出品者へのコメントがあれば入力してください'
   .form-controls.pull-right
     = f.button :submit, '評価登録', class: 'btn btn-primary'
+    = link_to 'キャンセル', [@evaluation.auction.category, @evaluation.auction], class: 'btn btn-default'
