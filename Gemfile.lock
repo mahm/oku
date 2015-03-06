@@ -48,6 +48,11 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     chronic (0.10.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -228,6 +233,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass (~> 3.3.1)
   capybara
+  carrierwave
   coffee-rails (~> 4.0.0)
   devise
   enumerize
