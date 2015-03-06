@@ -1,8 +1,24 @@
 .panel.panel-default
-  .panel-heading
-    = evaluation.auction.title
   .panel-body
-    = simple_format(evaluation.try(:comment))
+    %dl.dl-horizontal
+      - unless evaluation.evaluatee.id == current_user.id
+        %dt
+          出品者 :
+        %dd
+          = evaluation.evaluatee.email
+      - unless evaluation.evaluater.id == current_user.id
+        %dt
+          落札（評価）者 :
+        %dd
+          = evaluation.evaluater.email
+      %dt
+        オークション名 :
+      %dd
+        = evaluation.auction.title
+      %dt
+        コメント :
+      %dd
+        = simple_format(evaluation.try(:comment))
   - if evaluation.evaluater_id == current_user.id
     .panel-footer
       = link_to '訂正', [:edit, evaluation.auction.category, evaluation.auction, evaluation], class: 'btn btn-primary'
