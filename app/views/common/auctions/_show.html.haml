@@ -56,10 +56,12 @@
             %ul.list-inline
               %li
                 %span.glyphicon.glyphicon-thumbs-up
-                良い : 0
+                良い :
+                = @auction.user.reverse_evaluations.with_point(:good).size
               %li
                 %span.glyphicon.glyphicon-thumbs-down
-                悪い : 0
+                悪い :
+                = @auction.user.reverse_evaluations.with_point(:bad).size
       %tr
         %th
           オークション開始日時

@@ -1,6 +1,6 @@
 class Evaluation < ActiveRecord::Base
   extend Enumerize
-  enumerize :point, in: { bad: -1, good: 1 }
+  enumerize :point, in: { bad: -1, good: 1 }, scope: true
 
   belongs_to :auction
   belongs_to :evaluater, class_name: 'User'
