@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
   has_many :bids
   has_many :owned_auctions, class_name: 'Auction' # 自分が開催しているオークション
   has_many :bidding_auctions, through: :bids, source: :auction # 他人が開催し、自分が入札しているオークション
@@ -6,11 +11,6 @@ class User < ActiveRecord::Base
   has_many :evaluatees, through: :evaluations
   has_many :reverse_evaluations, foreign_key: 'evaluatee_id', class_name: 'Evaluation', dependent: :destroy
   has_many :evaluaters, through: :reverse_evaluations
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
 
   def accepted_auctions
     auctions = []
