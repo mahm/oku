@@ -4,25 +4,25 @@ RSpec.describe Bid, :type => :model do
   it 'auction_id 入力必須' do
     bid = build(:bid, auction_id: nil)
     bid.valid?
-    expect(bid.errors[:auction_id]).to include("can't be blank")
+    expect(bid.errors[:auction_id]).not_to be_empty
   end
 
   it 'user_id 入力必須' do
     bid = build(:bid, user_id: nil)
     bid.valid?
-    expect(bid.errors[:user_id]).to include("can't be blank")
+    expect(bid.errors[:user_id]).not_to be_empty
   end
 
   it 'price 入力必須' do
     bid = build(:bid, price: nil)
     bid.valid?
-    expect(bid.errors[:price]).to include("can't be blank")
+    expect(bid.errors[:price]).not_to be_empty
   end
 
   it 'price が 0 以上でなければならない' do
     bid = build(:bid, price: -1)
     bid.valid?
-    expect(bid.errors[:price]).to include("must be greater than or equal to 0")
+    expect(bid.errors[:price]).not_to be_empty
   end
 
   it 'オークションが開催期間内の入札は有効' do
@@ -40,7 +40,7 @@ RSpec.describe Bid, :type => :model do
     travel 3.day
     bid = Bid.new(auction_id: auction.id, user_id: bidder.id, price: 1)
     bid.valid?
-    expect(bid.errors[:auction_id]).to include("auction is over")
+    expect(bid.errors[:auction_id]).not_to be_empty
   end
 
   it 'オークション終了日時後でも、落札処理（入札データの保存）は可能' do
@@ -56,7 +56,7 @@ RSpec.describe Bid, :type => :model do
     bidder = create(:user)
     bid = Bid.new(auction_id: auction.id, user_id: bidder.id, price: 1)
     bid.valid?
-    expect(bid.errors[:auction_id]).to include("auction is not open")
+    expect(bid.errors[:auction_id]).not_to be_empty
   end
 
   it '現在の最高入札額以下の入札はできない' do
@@ -65,13 +65,13 @@ RSpec.describe Bid, :type => :model do
     create(:bid, auction_id: auction.id, price: 100)
     bid = build(:bid, auction_id: auction.id, price: 99)
     bid.valid?
-    expect(bid.errors[:price]).to include("price is not highest")
+    expect(bid.errors[:price]).not_to be_empty
   end
 
   it '開始価格以下の入札はできない' do
     auction = create(:auction, open_at: Time.now, close_at: Time.now + 7.day, first_price: 10)
     bid = build(:bid, auction_id: auction.id, price: 9)
     bid.valid?
-    expect(bid.errors[:price]).to include("price is not highest")
+    expect(bid.errors[:price]).not_to be_empty
   end
 end
