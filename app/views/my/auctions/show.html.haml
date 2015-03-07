@@ -1,7 +1,10 @@
 = render 'common/auctions/show'
 
-- if @auction.in_ready?
-  %hr
-  .pull-right
+%hr
+
+.pull-right
+  - if @auction.in_ready?
     = link_to '編集', [:edit, :my, @auction], class: 'btn btn-primary'
     = link_to '削除', [:my, @auction], method: :delete, class: 'btn btn-danger'
+  = link_to '戻る', [:my, :auctions], class: 'btn btn-default'
+
