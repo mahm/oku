@@ -6,6 +6,7 @@
 - else
   %table.table.table-striped
     %thead
+      %th カテゴリ
       %th タイトル
       %th 開始日時
       %th 終了予定日時
@@ -14,6 +15,7 @@
     %tbody
       - bidding_auctions.each do |auction|
         %tr
+          %td= auction.category.name
           %td= auction.title
           %td= auction.open_at
           %td= auction.close_at
