@@ -22,4 +22,4 @@
           %td= auction.close_at
           %td= auction.user.email
           %td= "#{number_with_delimiter(auction.accepted_price)} 円"
-          %td= link_to '詳細表示', [auction.category, auction], class: 'label label-primary'
+          %td= link_to '詳細表示', [:my, auction], class: 'label label-primary'
