@@ -5,16 +5,14 @@
         評価 :
       %dd
         = evaluation.point_text
-      - unless evaluation.evaluatee.id == current_user.id
-        %dt
-          出品者 :
-        %dd
-          = evaluation.evaluatee.email
-      - unless evaluation.evaluater.id == current_user.id
-        %dt
-          落札（評価）者 :
-        %dd
-          = evaluation.evaluater.email
+      %dt
+        出品者 :
+      %dd
+        = evaluation.evaluatee.email
+      %dt
+        落札（評価）者 :
+      %dd
+        = evaluation.evaluater.email
       %dt
         オークション名 :
       %dd
