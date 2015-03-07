@@ -13,7 +13,7 @@
     - if @auction.picture?
       = image_tag @auction.picture.url, size: '300x240'
     - else
-      = image_tag 'http://placehold.jp/888/fefefe/300x240.png?text=NO%20IMAGE'
+      = image_tag 'noimage.png', size: '300x240'
   .col-md-8
     %table.table.table-bordered
       %tr

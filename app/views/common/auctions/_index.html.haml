@@ -7,7 +7,7 @@
           - if auction.picture?
             = image_tag auction.picture.url, size: '150x120'
           - else
-            = image_tag 'http://placehold.jp/888/fefefe/150x120.png?text=NO%20IMAGE'
+            = image_tag 'noimage.png', size: '150x120'
         %li
           %dl.dl-horizontal
             %dt タイトル :
