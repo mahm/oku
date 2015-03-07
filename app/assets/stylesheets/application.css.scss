@@ -46,3 +46,12 @@ h2 {
   margin-top: 10px;
 }
 
+.datetime-inputs {
+  label {
+    display: block;
+  }
+  input, select {
+    display: inline;
+    width: auto;
+  }
+}

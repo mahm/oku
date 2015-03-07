@@ -3,9 +3,11 @@
   .form-controls
     = f.input :category_id, as: :select, collection: Category.all
     = f.input :title
-    = f.input :picture, as: :file
-    = f.input :explanation
     = f.input :first_price
-    = f.input :open_at
-    = f.input :close_at
+    .datetime-inputs
+      = f.input :open_at
+    .datetime-inputs
+      = f.input :close_at
+    = f.input :picture, as: :file
+    = f.input :explanation, input_html: {rows: 10}
     = f.button :submit
