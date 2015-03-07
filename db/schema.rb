@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150306083855) do
+ActiveRecord::Schema.define(version: 20150307032257) do
 
   create_table "auctions", force: true do |t|
     t.integer  "user_id",                     null: false
@@ -62,9 +62,9 @@ ActiveRecord::Schema.define(version: 20150306083855) do
     t.integer  "point",        default: 0
   end
 
+  add_index "evaluations", ["auction_id", "evaluater_id", "evaluatee_id"], name: "index_unique_evaluation", unique: true
   add_index "evaluations", ["auction_id"], name: "index_evaluations_on_auction_id"
   add_index "evaluations", ["evaluatee_id"], name: "index_evaluations_on_evaluatee_id"
-  add_index "evaluations", ["evaluater_id", "evaluatee_id"], name: "index_evaluations_on_evaluater_id_and_evaluatee_id", unique: true
   add_index "evaluations", ["evaluater_id"], name: "index_evaluations_on_evaluater_id"
 
   create_table "users", force: true do |t|
