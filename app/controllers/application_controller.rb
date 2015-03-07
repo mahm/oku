@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   # 終了日時を過ぎているオークションを終了し、落札処理を行います。
   # 本来は Controller に入れるべき処理ではないですが、コードレビュー専用アプリなので
   # このような実装にしました。
-  # 本来は whenever gem などを使って行うべきでしょうか...
+  # 本来は whenever などを使って行うべきでしょうか...
   before_action :close_auction
 
   def close_auction
