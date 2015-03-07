@@ -1,4 +1,4 @@
-- bidding_auctions = current_user.bidding_auctions.where(closed: false).uniq
+- bidding_auctions = current_user.bidded_auctions.opened.uniq
 
 - if bidding_auctions.blank?
   %p.text-muted
