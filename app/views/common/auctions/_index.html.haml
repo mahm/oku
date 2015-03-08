@@ -3,7 +3,6 @@
     = link_to [auction.category, auction] do
       %ul.list-inline
         %li
-          -#%img.img-thumbnail{src: 'http://placeimg.com/150/120/tech'}
           - if auction.picture?
             = image_tag auction.picture.url, size: '150x120'
           - else
