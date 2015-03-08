@@ -1,11 +1,11 @@
 class Auction < ActiveRecord::Base
+  mount_uploader :picture, ItemPictureUploader
+
   belongs_to :user # auctioneer
   belongs_to :category
   has_many :bids
   has_many :users, through: :bids # 入札者
   has_many :evaluations
-
-  mount_uploader :picture, ItemPictureUploader
 
   validates :user_id, presence: true
   validates :open_at, presence: true
