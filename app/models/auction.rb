@@ -1,7 +1,7 @@
 class Auction < ActiveRecord::Base
   mount_uploader :picture, ItemPictureUploader
 
-  belongs_to :user # auctioneer
+  belongs_to :user # 出品者
   belongs_to :category
   has_many :bids
   has_many :users, through: :bids # 入札者
