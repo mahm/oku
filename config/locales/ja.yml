@@ -1,9 +1,40 @@
 ja:
+
+  activerecord:
+    models:
+      category: カテゴリ
+      user: ユーザー
+      auction: オークション
+      bid: 入札
+      evaluation: 評価
+    attributes:
+      category:
+        name: 名
+      auction:
+        category_id: カテゴリ
+        title: タイトル
+        first_price: 開始価格
+        open_at: 開始日時
+        close_at: 終了日時
+        picture: 商品画像
+        explanation: 商品の説明
+      bid:
+        auction_id: オークション
+        user_id: 入札者
+        price: 入札額
+        accepted: 落札済
+      evaluation:
+        evaluater_id: 評価者
+        evaluatee_id: 出品者
+        auction_id: オークション
+        comment: コメント
+        point: 評価
+
   enumerize:
     evaluation:
       point:
-        good: '良い'
-        bad: '悪い'
+        good: 良い
+        bad: 悪い
 
 # from https://raw.githubusercontent.com/svenfuchs/rails-i18n/master/rails/locale/ja.yml
   date:
