@@ -15,7 +15,14 @@ class Auction < ActiveRecord::Base
   validates :category_id, presence: true
   validates :first_price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
 
+  validate :open_time_cannot_be_in_past
   validate :close_time_cannot_be_in_past_of_open_time
+
+  def open_time_cannot_be_in_past
+    unless open_at.blank?
+      errors.add(:open_at, 'invalid open time') if Time.now >= open_at
+    end
+  end
 
   def close_time_cannot_be_in_past_of_open_time
     unless close_at.blank? || open_at.blank?

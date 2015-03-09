@@ -69,7 +69,8 @@ RSpec.describe Bid, :type => :model do
   end
 
   it '開始価格以下の入札はできない' do
-    auction = create(:auction, open_at: Time.now, close_at: Time.now + 7.day, first_price: 10)
+    auction = create(:auction, open_at: Time.now + 1.day, close_at: Time.now + 7.day, first_price: 10)
+    travel 2.day
     bid = build(:bid, auction_id: auction.id, price: 9)
     bid.valid?
     expect(bid.errors[:price]).not_to be_empty

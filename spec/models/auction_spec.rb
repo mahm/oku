@@ -40,4 +40,10 @@ RSpec.describe Auction, :type => :model do
     auction.valid?
     expect(auction.errors[:close_at]).not_to be_empty
   end
+
+  it 'is invalid when open time is past' do
+    auction = build(:auction, open_at: Time.now - 1.minute)
+    auction.valid?
+    expect(auction.errors[:open_at]).not_to be_empty
+  end
 end
