@@ -20,7 +20,7 @@ class Auction < ActiveRecord::Base
 
   def open_time_cannot_be_in_past
     unless open_at.blank?
-      errors.add(:open_at, 'invalid open time') if Time.now >= open_at
+      errors.add(:open_at, 'invalid open time') if Time.now >= open_at && !self.closed
     end
   end
 
