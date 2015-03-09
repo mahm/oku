@@ -26,9 +26,7 @@ class Auction < ActiveRecord::Base
 
   def close_time_cannot_be_in_past_of_open_time
     unless close_at.blank? || open_at.blank?
-      if open_at >= close_at
-        errors.add(:close_at, 'invalid close time')
-      end
+      errors.add(:close_at, 'invalid close time') if open_at >= close_at
     end
   end
 
