@@ -7,10 +7,16 @@
 
 .well
   %p
-    現在の入札最高額は、
-    %span.highest-price
-      = number_with_delimiter(@bid.auction.highest_price)
-    円です。
+    - if @bid.auction.bids.count > 0
+      現在の入札最高額は、
+      %span.highest-price
+        = number_with_delimiter(@bid.auction.highest_price)
+      円です。
+    - else
+      開始価格は、
+      %span.highest-price
+        = number_with_delimiter(@bid.auction.first_price)
+      円です。
   %p
     これよりも 1 円以上多い金額を入力し、「入札」ボタンを押して下さい。
 
