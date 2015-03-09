@@ -12,6 +12,6 @@
             %dt タイトル :
             %dd= auction.title
             %dt 現在の最高入札金額 :
-            %dd= "#{auction.highest_price} 円"
+            %dd= "#{number_with_delimiter(auction.highest_price)} 円"
             %dt 終了日時 :
             %dd= auction.close_at
