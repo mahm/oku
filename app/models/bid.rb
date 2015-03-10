@@ -9,6 +9,8 @@ class Bid < ActiveRecord::Base
   validate :auction_is_in_time
   validate :price_is_highest
 
+  private
+
   def auction_is_in_time
     unless auction_id.blank?
       errors.add(:auction_id, 'auction is over') if Time.now >= auction.close_at && !accepted
