@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :category, only: %i() do
     resources :auctions, only: %i(index show) do
       resources :bids, only: %i(index new create)
-      resources :evaluations, only: %i(index new create edit update destroy)
+      resources :evaluations
     end
   end
 
