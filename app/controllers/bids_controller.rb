@@ -2,7 +2,7 @@ class BidsController < ApplicationController
   before_action :set_auction
 
   def index
-    @bids = @auction.bids.order('price DESC').all
+    @bids = @auction.bids.order(price: :desc).all
   end
 
   def new
