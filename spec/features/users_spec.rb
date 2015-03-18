@@ -4,17 +4,19 @@ feature '新規ユーザー登録', type: :feature do
   let(:email) { 'foo@bar.com' }
 
   scenario '正常なサインアップ' do
-    visit root_path
-    click_on 'サインイン'
-    expect(current_path).to eq(new_user_session_path)
-    click_on 'こちらへ'
-    expect(current_path).to eq(new_user_registration_path)
-    fill_in 'user[email]', with: email
-    fill_in 'user[password]', with: 'xxx'
-    fill_in 'user[password_confirmation]', with: 'xxx'
-    click_on '新規ユーザー登録'
-    expect(page).to have_content('Welcome!')
-    expect(page).to have_link(email)
+    expect {
+      visit root_path
+      click_on 'サインイン'
+      expect(current_path).to eq(new_user_session_path)
+      click_on 'こちらへ'
+      expect(current_path).to eq(new_user_registration_path)
+      fill_in 'user[email]', with: email
+      fill_in 'user[password]', with: 'xxx'
+      fill_in 'user[password_confirmation]', with: 'xxx'
+      click_on '新規ユーザー登録'
+      expect(page).to have_content('Welcome!')
+      expect(page).to have_link(email)
+    }.to change(User, :count).by(1)
   end
 end
 
