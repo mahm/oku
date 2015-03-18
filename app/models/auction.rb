@@ -87,13 +87,13 @@ class Auction < ActiveRecord::Base
 
   def open_time_cannot_be_in_past
     unless open_at.blank?
-      errors.add(:open_at, 'invalid open time') if Time.now >= open_at && !self.closed
+      errors.add(:open_at, '開始時間が過去になっています') if Time.now >= open_at && !self.closed
     end
   end
 
   def close_time_cannot_be_in_past_of_open_time
     unless close_at.blank? || open_at.blank?
-      errors.add(:close_at, 'invalid close time') if open_at >= close_at
+      errors.add(:close_at, '終了時間以降に開始時間を設定できません') if open_at >= close_at
     end
   end
 end
