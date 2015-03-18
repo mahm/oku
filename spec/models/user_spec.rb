@@ -26,16 +26,24 @@ RSpec.describe User, :type => :model do
   end
 
   describe 'count accepted auctions' do
-    it do
-      auction_count = 2
-      auctioneer = create(:user)
-      bidder = create(:user)
-      (1..auction_count).each { create(:auction, user_id: auctioneer.id) }
-      travel 2.hour
-      auctioneer.owned_auctions.each { |auction| create(:bid, user_id: bidder.id, auction_id: auction.id, price: 1) }
-      travel 24.hour
-      auctioneer.owned_auctions.each { |auction| auction.accept_and_close }
-      expect(bidder.accepted_auctions.count).to eq auction_count
+    context 'when a bidder knock down 2 auctions' do
+      it do
+        auction_count = 2
+        auctioneer = create(:user)
+        bidder = create(:user)
+        (1..auction_count).each { create(:auction, user_id: auctioneer.id) }
+        travel 2.hour
+        auctioneer.owned_auctions.each { |auction| create(:bid, user_id: bidder.id, auction_id: auction.id, price: 1) }
+        travel 24.hour
+        auctioneer.owned_auctions.each { |auction| auction.accept_and_close }
+        expect(bidder.accepted_auctions.count).to eq auction_count
+      end
+    end
+    context 'when a bidder can not knock down any auction' do
+      it do
+        bidder = create(:user)
+        expect(bidder.accepted_auctions.count).to eq 0
+      end
     end
   end
 end
