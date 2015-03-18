@@ -19,7 +19,7 @@ class Auction < ActiveRecord::Base
   validate :close_time_cannot_be_in_past_of_open_time
 
   def in_ready?
-    open_at >= Time.now
+    open_at > Time.now
   end
 
   def open?
