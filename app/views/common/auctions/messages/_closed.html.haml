@@ -5,7 +5,7 @@
         おめでとうございます！
       %p
         このオークションは、あなたが落札しました。
-    - if @auction.already_evaluated_by? current_user.id
+    - if @auction.already_evaluated_by?(current_user.id)
       %p
         あなたはこの出品者を以下の通り評価しました。
       = render 'common/evaluations/show', evaluation: @auction.evaluations.find_by_evaluater_id(current_user.id)
