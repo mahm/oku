@@ -60,6 +60,6 @@ class My::AuctionsController < My::ApplicationController
 
   def set_auction
     @auction = current_user.owned_auctions.find_by_id(params[:id])
-    @auction = current_user.bidded_auctions.find(params[:id]) if @auction.blank?
+    @auction ||= current_user.bidded_auctions.find(params[:id])
   end
 end
