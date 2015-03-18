@@ -16,10 +16,6 @@ class User < ActiveRecord::Base
   has_many :evaluaters, through: :reverse_evaluations
 
   def accepted_auctions
-    auctions = []
-    Bid.where(accepted: true, user_id: self.id).each do |bid|
-      auctions<<bid.auction
-    end
-    auctions
+    Bid.where(accepted: true, user_id: self.id).inject(Array.new) { |auctions, bid| auctions<<bid.auction }
   end
 end
