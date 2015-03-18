@@ -38,6 +38,8 @@ RSpec.describe Bid, :type => :model do
     auction = create(:auction, open_at: Time.now + 1.day, close_at: Time.now + 3.day)
     bidder = create(:user)
     travel 3.day
+    auction.closed = true
+    auction.save
     bid = Bid.new(auction_id: auction.id, user_id: bidder.id, price: 1)
     bid.valid?
     expect(bid.errors[:auction_id]).not_to be_empty
