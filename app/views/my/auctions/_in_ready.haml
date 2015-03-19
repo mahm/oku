@@ -3,7 +3,7 @@
 - if unopened_auctions.blank?
   %p.text-muted 出品予定のオークションはありません。
 - else
-  %table.table.table-striped.table-my-auction
+  %table#auctions-in-ready.table.table-striped.table-my-auction
     %thead
       %th カテゴリ
       %th タイトル
