@@ -3,13 +3,12 @@ require 'rails_helper'
 feature 'オークション', type: :feature do
   given!(:auctioneer) { create(:user, password: 'xxx') }
 
-  before(:each) do
-    sign_in(auctioneer)
-    click_on 'マイ・オークション'
-    click_on 'オークションの新規作成'
-  end
-
   feature '新規作成処理' do
+    before(:each) do
+      sign_in(auctioneer)
+      click_on 'マイ・オークション'
+      click_on 'オークションの新規作成'
+    end
     context 'カテゴリ, タイトル, 開始価格の全てが入力されている' do
       before(:each) do
         select Category.all.sample.name, from: 'カテゴリ'
@@ -91,6 +90,47 @@ feature 'オークション', type: :feature do
         click_on '登録する'
         expect(Auction.count).to eq(0)
         expect(current_path).to eq(polymorphic_path([:my, :auctions]))
+      end
+    end
+  end
+
+  feature '更新' do
+    before(:each) do
+      create_auction_start_1year_after_end_2year_after(auctioneer)
+    end
+    scenario '準備中のオークションを更新' do
+      visit polymorphic_path([:my, :auctions])
+      expect(page).to have_table('auctions-in-ready')
+      click_link '詳細表示'
+      expect(current_path).to eq(polymorphic_path([:my, Auction.last]))
+      click_link '編集'
+      expect(current_path).to eq(polymorphic_path([:edit, :my, Auction.last]))
+      new_title = '更新後のオークションのタイトル'
+      fill_in 'タイトル', with: new_title
+      click_button '更新する'
+      expect(page).to have_content(new_title)
+    end
+  end
+
+  feature '開始' do
+    before(:each) do
+      create_auction_start_1year_after_end_2year_after(auctioneer)
+      travel 1.year
+    end
+    context '開始日時を過ぎた場合' do
+      scenario 'マイ・オークションの「出品中」の一覧に表示される' do
+        visit polymorphic_path([:my, :auctions])
+        expect(find('#auctions-opened')).to have_content(Auction.last.title)
+      end
+      scenario 'トップページににも表示される' do
+        visit root_path
+        expect(find('.auction')).to have_content(Auction.last.title)
+      end
+      scenario 'カテゴリ別ページににも表示される' do
+        visit root_path
+        click_link Auction.last.category.name
+        expect(current_path).to eq(polymorphic_path([Auction.last.category, :auctions]))
+        expect(find('.auction')).to have_content(Auction.last.title)
       end
     end
   end
