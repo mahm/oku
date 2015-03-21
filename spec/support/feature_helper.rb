@@ -17,5 +17,6 @@ module FeatureHelper
     select "#{(Time.now+1.year).year}", from: 'auction[open_at(1i)]'
     select "#{(Time.now+2.year).year}", from: 'auction[close_at(1i)]'
     click_on '登録する'
+    click_on 'サインアウト'
   end
 end
