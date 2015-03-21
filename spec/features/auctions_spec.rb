@@ -134,4 +134,40 @@ feature 'オークション', type: :feature do
       end
     end
   end
+
+  feature '終了と落札' do
+    before(:each) do
+      create_auction_start_1year_after_end_2year_after(auctioneer)
+      click_on 'サインアウト'
+      @bidder = create(:user, password: 'xxx')
+      travel 1.year
+      sign_in(@bidder)
+      visit polymorphic_path([Auction.last.category, Auction.last])
+      click_on '入札する'
+      fill_in '入札額', with: Auction.last.first_price+1
+      click_on '入札'
+      click_on 'サインアウト'
+      travel 2.year
+      visit polymorphic_path([Auction.last.category, Auction.last])
+    end
+    context '終了日時以降の場合' do
+      scenario 'オークションは終了している' do
+        expect(page).to have_content('終了')
+        expect(page).not_to have_content('あなたが落札しました')
+        expect(page).not_to have_content('出品者を評価する')
+      end
+      context '落札者の場合' do
+        before(:each) do
+          sign_in(@bidder)
+          visit polymorphic_path([Auction.last.category, Auction.last])
+        end
+        scenario '自分が落札した事が表示される' do
+          expect(page).to have_content('あなたが落札しました')
+        end
+        scenario '出品者を評価するボタンが表示される' do
+          expect(page).to have_content('出品者を評価する')
+        end
+      end
+    end
+  end
 end
