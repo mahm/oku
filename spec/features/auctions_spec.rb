@@ -97,6 +97,7 @@ feature 'オークション', type: :feature do
   feature '更新' do
     before(:each) do
       create_auction_start_1year_after_end_2year_after(auctioneer)
+      sign_in(auctioneer)
     end
     scenario '準備中のオークションを更新' do
       visit polymorphic_path([:my, :auctions])
@@ -116,6 +117,7 @@ feature 'オークション', type: :feature do
     before(:each) do
       create_auction_start_1year_after_end_2year_after(auctioneer)
       travel 1.year
+      sign_in(auctioneer)
     end
     context '開始日時を過ぎた場合' do
       scenario 'マイ・オークションの「出品中」の一覧に表示される' do
@@ -138,7 +140,6 @@ feature 'オークション', type: :feature do
   feature '終了と落札' do
     before(:each) do
       create_auction_start_1year_after_end_2year_after(auctioneer)
-      click_on 'サインアウト'
       @bidder = create(:user, password: 'xxx')
       travel 1.year
       sign_in(@bidder)
