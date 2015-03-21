@@ -15,7 +15,7 @@ class Auction < ActiveRecord::Base
   validates :category_id, presence: true
   validates :first_price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
 
-  validate :open_time_cannot_be_in_past
+  validate :open_time_cannot_be_in_past, unless: :close?
   validate :close_time_cannot_be_in_past_of_open_time
 
   def in_ready?
