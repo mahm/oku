@@ -56,7 +56,7 @@ class Auction < ActiveRecord::Base
   end
 
   def successful_bidder
-    bids.where(accepted: true).first.user.email if bids.present?
+    bids.where(accepted: true).first.user if bids.present?
   end
 
   def accepted_by?(user_id)

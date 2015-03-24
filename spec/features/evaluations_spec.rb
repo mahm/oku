@@ -38,7 +38,7 @@ RSpec.feature '評価', type: :feature do
       expect(page).to have_selector('#evaluation')
       expect(page).to have_content(Auction.last.title)
       expect(page).to have_content(Auction.last.user.email)
-      expect(page).to have_content(Auction.last.successful_bidder)
+      expect(page).to have_content(Auction.last.successful_bidder.email)
       expect(page).to have_content(comment)
       expect(page).to have_link('訂正')
       expect(page).to have_link('取消')
