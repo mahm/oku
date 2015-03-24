@@ -19,4 +19,13 @@ module FeatureHelper
     click_on '登録する'
     click_on 'サインアウト'
   end
+
+  def bid(auction, bidder, price)
+    sign_in(bidder)
+    visit polymorphic_path([auction.category, auction])
+    click_on '入札する'
+    fill_in '入札額', with: price
+    click_on '入札'
+    click_on 'サインアウト'
+  end
 end
