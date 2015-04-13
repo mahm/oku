@@ -59,7 +59,10 @@ class My::AuctionsController < My::ApplicationController
   end
 
   def set_auction
-    @auction = current_user.owned_auctions.find_by_id(params[:id])
-    @auction ||= current_user.bidded_auctions.find(params[:id])
+    # ロジックをモデルに追い出す
+    @auction = current_user.related_auction_by_id(params[:id])
+    raise ActiveRecord::RecordNotFound if @auction.blank?
+    # @auction = current_user.owned_auctions.find_by_id(params[:id])
+    # @auction ||= current_user.bidded_auctions.find(params[:id])
   end
 end

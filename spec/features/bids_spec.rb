@@ -4,6 +4,7 @@ feature '入札処理', type: :feature do
   before(:each) do
     @auctioneer = create(:user, password: 'xxx')
     @bidder = create(:user, password: 'xxx')
+    create(:category)
     create_auction_start_1year_after_end_2year_after(@auctioneer)
     travel 1.year
   end

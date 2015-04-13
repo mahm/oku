@@ -9,15 +9,16 @@ class Bid < ActiveRecord::Base
   validate :auction_is_in_time, if: 'auction_id.present?'
   validate :price_is_highest, if: 'auction.present? && price.present? && !accepted'
 
+  scope :only_accepted, -> { where(accepted: true) }
+
   private
 
   def auction_is_in_time
-    errors.add(:auction_id, 'オークションは終了しています') if auction.closed && !accepted
-    errors.add(:auction_id, 'オークションは準備中です') if auction.open_at > Time.now
+    errors.add(:auction_id, 'オークションは終了しています') if auction.close? && !accepted
+    errors.add(:auction_id, 'オークションは準備中です') if auction.in_ready?
   end
 
   def price_is_highest
-    errors.add(:price, '入札額が最高金額ではありません') if auction.first_price >= price
-    errors.add(:price, '入札額が最高金額ではありません') if auction.bids.maximum(:price).to_i >= price
+    errors.add(:price, '入札額が最高金額ではありません') unless auction.biddable_price?(price)
   end
 end

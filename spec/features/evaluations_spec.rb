@@ -5,6 +5,7 @@ RSpec.feature '評価', type: :feature do
     @auctioneer = create(:user, password: 'xxx')
     @bidder_lose = create(:user, password: 'xxx')
     @bidder_win = create(:user, password: 'xxx')
+    create(:category)
     create_auction_start_1year_after_end_2year_after(@auctioneer)
     travel 1.year
     bid(Auction.last, @bidder_lose, Auction.last.first_price+1)

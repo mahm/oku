@@ -22,6 +22,7 @@ gem 'gretel'
 gem 'carrierwave'
 
 group :development do
+  # productionがPostgreSQLなのであれば、ローカルでの開発もPostgreSQLを使った方が、デプロイ時に障害が起こる可能性は低くなるかと思います
   gem 'sqlite3'
   gem 'better_errors'
   gem 'binding_of_caller'

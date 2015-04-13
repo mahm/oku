@@ -5,6 +5,7 @@ feature 'オークション', type: :feature do
 
   feature '新規作成処理' do
     before(:each) do
+      create(:category)
       sign_in(auctioneer)
       click_on 'マイ・オークション'
       click_on 'オークションの新規作成'
@@ -96,6 +97,7 @@ feature 'オークション', type: :feature do
 
   feature '更新' do
     before(:each) do
+      create(:category)
       create_auction_start_1year_after_end_2year_after(auctioneer)
       sign_in(auctioneer)
     end
@@ -115,6 +117,7 @@ feature 'オークション', type: :feature do
 
   feature '開始' do
     before(:each) do
+      create(:category)
       create_auction_start_1year_after_end_2year_after(auctioneer)
       travel 1.year
       sign_in(auctioneer)
@@ -139,6 +142,7 @@ feature 'オークション', type: :feature do
 
   feature '終了と落札' do
     before(:each) do
+      create(:category)
       create_auction_start_1year_after_end_2year_after(auctioneer)
       @bidder = create(:user, password: 'xxx')
       travel 1.year

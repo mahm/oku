@@ -50,11 +50,17 @@ RSpec.describe Auction, :type => :model do
   describe 'オークション終了処理' do
     context '入札が 1 件以上存在する場合' do
       before(:each) do
-        @auction = create(:auction, open_at: Time.now+1.hour, close_at: Time.now+2.hour)
+        # @auction = create(:auction, open_at: Time.now+1.hour, close_at: Time.now+2.hour)
+        # sinceを使う方がリーダブルかなー
+        @auction = create(:auction, open_at: 1.hour.since, close_at: 2.hours.since)
         @bidder = create(:user)
         travel 1.hour
-        create(:bid, auction_id: @auction.id, user_id: @bidder.id, price: @auction.first_price+1)
-        create(:bid, auction_id: @auction.id, user_id: @bidder.id, price: @auction.bids.order(:price).last.price+1)
+        # 単純にこういうデータの作り方でも良いのでは
+        [100, 101].each do |price|
+          create(:bid, auction_id: @auction.id, user_id: @bidder.id, price: price)
+        end
+        # create(:bid, auction_id: @auction.id, user_id: @bidder.id, price: @auction.first_price+1)
+        # create(:bid, auction_id: @auction.id, user_id: @bidder.id, price: @auction.bids.order(:price).last.price+1)
         travel 2.hour
         @auction.accept_and_close
       end

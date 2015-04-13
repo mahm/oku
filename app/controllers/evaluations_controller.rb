@@ -4,13 +4,15 @@ class EvaluationsController < ApplicationController
 
   def index
     @evaluatee = User.find(params[:user_id])
-    @evaluations = Evaluation.where(evaluatee_id: @evaluatee.id)
+    # @evaluations = Evaluation.where(evaluatee_id: @evaluatee.id)
+    @evaluations = @evaluatee.evaluations
   end
 
   def new
-    @evaluation = Evaluation.new(auction_id: @auction.id,
-                                 evaluatee_id: @auction.user.id,
-                                 evaluater_id: current_user.id)
+    @evaluation = @auction.evaluations.build(evaluatee: @auction.user, evaluater: current_user)
+    # @evaluation = Evaluation.new(auction_id: @auction.id,
+    #                              evaluatee_id: @auction.user.id,
+    #                              evaluater_id: current_user.id)
   end
 
   def create
@@ -34,7 +36,8 @@ class EvaluationsController < ApplicationController
       if @evaluation.update(evaluation_params)
         format.html { redirect_to [@evaluation.auction.category, @evaluation.auction], notice: 'このオークションへの評価を変更しました。' }
       else
-        format.html { render :html }
+        format.html { render :edit }
+        # format.html { render :html }
       end
     end
   end
